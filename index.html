@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
 <meta charset="utf-8"/>
@@ -176,7 +177,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
-</style>
+  </style>
 <script>
     function copyPix() {
       navigator.clipboard.writeText('autofaq@gmail.com').then(function () {
@@ -192,7 +193,7 @@
         parceiroBtn.classList.add('animated');
       }
     };
-
+  
     function loginAnonimo() {
       const nome = "usuário/" + Math.floor(Math.random() * 100000);
       alert("Você entrou como: " + nome);
@@ -202,20 +203,23 @@
 </head>
 <body>
 <header>
-  <h1>Auto FAQ</h1>
-  <div class="sub-header">
-    <a href="menu.html">🌟 Seja um Parceiro</a>
-  </div>
+<h1>Auto FAQ</h1>
+<div class="sub-header">
+<a href="menu.html">🌟 Seja um Parceiro</a>
+</div>
 </header>
 <main>
-  <h2>Escolha uma marca para visualizar perguntas frequentes</h2>
-  <div class="brand-grid">
-    <div class="brand-card" onclick="location.href='nissan.html'"><span>Nissan</span></div>
-  </div>
+<h2>Escolha uma marca para visualizar perguntas frequentes</h2>
+<div class="brand-grid">
+<div class="brand-card" onclick="location.href='fiat.html'"><span>Fiat</span></div>
+<div class="brand-card" onclick="location.href='chevrolet.html'"><span>Chevrolet</span></div>
+<div class="brand-card" onclick="location.href='renault.html'"><span>Renault</span></div>
+<div class="brand-card" onclick="location.href='nissan.html'"><span>Nissan</span></div>
+</div>
 </main>
 <footer>
-  © 2025 Auto FAQ. Todos os direitos reservados.<br/>
-  <a class="donate-button" href="javascript:void(0)" onclick="copyPix()">💛 Ajude o desenvolvedor</a>
+    © 2025 Auto FAQ. Todos os direitos reservados.<br/>
+<a class="donate-button" href="javascript:void(0)" onclick="copyPix()">💛 Ajude o desenvolvedor</a>
 </footer>
 </body>
 </html>
