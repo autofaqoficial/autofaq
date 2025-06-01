@@ -71,7 +71,10 @@
       border-radius: 3px;
     }
 
-    .resposta-input {
+    .resposta-area { display: none; margin-top: 10px; }
+.resposta-area.ativa { display: block; }
+
+.resposta-input {
       margin-top: 10px;
     }
 
@@ -219,7 +222,10 @@
           </div>
         `;
 
-        // Campo de resposta embutido
+        
+        const respostaArea = document.createElement('div');
+        respostaArea.className = "resposta-area";
+
         const respostaInput = document.createElement('textarea');
         respostaInput.className = "resposta-input";
         respostaInput.placeholder = "Digite sua resposta (máx 150 caracteres)";
@@ -234,9 +240,10 @@
           contador.textContent = `Restam ${restantes} caracteres`;
         });
 
-        const botaoResponder = document.createElement('button');
-        botaoResponder.textContent = "Responder";
-        botaoResponder.onclick = () => {
+        const enviarBtn = document.createElement('button');
+        enviarBtn.textContent = "Enviar resposta";
+        enviarBtn.style.marginTop = "8px";
+        enviarBtn.onclick = () => {
           const resposta = respostaInput.value.trim();
           if (!resposta) return alert("Digite uma resposta.");
           const user = localStorage.getItem("faq_user") || "Anônimo";
@@ -248,11 +255,27 @@
           });
         };
 
-        div.appendChild(respostaInput);
-        div.appendChild(contador);
-        div.appendChild(botaoResponder);
+        const botaoMostrar = document.createElement('button');
+        botaoMostrar.textContent = "Responder";
+        botaoMostrar.style.backgroundColor = "#ccc";
+        botaoMostrar.style.color = "#333";
+        botaoMostrar.style.border = "none";
+        botaoMostrar.style.padding = "6px 12px";
+        botaoMostrar.style.borderRadius = "4px";
+        botaoMostrar.style.cursor = "pointer";
+        botaoMostrar.style.marginTop = "10px";
 
-        // Exibe respostas existentes
+        botaoMostrar.onclick = () => {
+          respostaArea.classList.toggle("ativa");
+        };
+
+        respostaArea.appendChild(respostaInput);
+        respostaArea.appendChild(contador);
+        respostaArea.appendChild(enviarBtn);
+
+        div.appendChild(botaoMostrar);
+        div.appendChild(respostaArea);
+// Exibe respostas existentes
         if (item.respostas && Array.isArray(item.respostas)) {
           item.respostas.forEach(resp => {
             const respDiv = document.createElement('div');
