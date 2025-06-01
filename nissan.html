@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FAQ Nissan - Firebase Responsivo</title>
+  <title>FAQ Nissan - Firebase Mobile</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       font-size: 1.1rem;
@@ -32,6 +36,11 @@
       border: 1px solid #ccc;
     }
 
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
     button {
       background-color: #0066cc;
       color: white;
@@ -39,7 +48,7 @@
       padding: 12px;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -52,6 +61,18 @@
       background: #fff;
       border-left: 4px solid #0066cc;
       border-radius: 5px;
+    }
+
+    .resposta {
+      margin-top: 8px;
+      background: #eef4ff;
+      padding: 8px;
+      border-left: 3px solid #0066cc;
+      border-radius: 3px;
+    }
+
+    .resposta-input {
+      margin-top: 10px;
     }
 
     .top-bar {
@@ -67,12 +88,31 @@
       margin-top: 10px;
       color: green;
     }
+
+    .autor-icon {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      border-radius: 50%;
+      background: #ccc;
+      color: #fff;
+      text-align: center;
+      margin-right: 6px;
+      font-weight: bold;
+    }
+
+    .contador {
+      font-size: 0.9rem;
+      text-align: right;
+      color: #555;
+    }
   </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <button onclick="window.location.href='index.html'">⬅️ Voltar</button>
+  <button onclick="window.location.href='https://autofaqoficial.github.io/autofaq/index.html'">⬅️ Voltar</button>
 </div>
 
 <h1>FAQ Nissan - Firebase</h1>
@@ -99,7 +139,14 @@
 
 <script>
   const firebaseConfig = {
-    apiKey: "AIzaSyANXDKp7FAGxq8SGqJmO4Cr_nQ_NsOcLws",
+    apiKey: "AIzaSyBfBqOOcOmog_6V9ZUxc02PtVYv2Z64mEQ",
+    authDomain: "autofaq-c0c21.firebaseapp.com",
+    databaseURL: "https://autofaq-c0c21-default-rtdb.firebaseio.com",
+    projectId: "autofaq-c0c21",
+    storageBucket: "autofaq-c0c21.firebasestorage.app",
+    messagingSenderId: "174442660737",
+    appId: "1:174442660737:web:2c2405f7bc3439c10a1e80"
+  //AIzaSyANXDKp7FAGxq8SGqJmO4Cr_nQ_NsOcLws",
     authDomain: "autofaq-8b600.firebaseapp.com",
     databaseURL: "https://autofaq-8b600-default-rtdb.firebaseio.com",
     projectId: "autofaq-8b600",
@@ -135,6 +182,7 @@
     novaRef.set({
       pergunta: pergunta,
       autor: autor || "Anônimo",
+      timestamp: Date.now(),
       respostas: []
     }).then(() => {
       document.getElementById('status').innerText = "✅ Pergunta salva!";
@@ -145,16 +193,82 @@
     });
   }
 
+  function formatarData(timestamp) {
+    const data = new Date(timestamp);
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const hora = String(data.getHours()).padStart(2, '0');
+    const min = String(data.getMinutes()).padStart(2, '0');
+    return `${dia}/${mes}/${ano} ${hora}:${min}`;
+  }
+
   function carregarPerguntas() {
     const lista = document.getElementById('listaPerguntas');
     lista.innerHTML = "Carregando...";
     db.ref("faq/nissan").once("value", snapshot => {
       const dados = snapshot.val() || {};
+      const perguntas = Object.entries(dados);
+      perguntas.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
       lista.innerHTML = "";
-      Object.entries(dados).forEach(([id, item]) => {
+
+      perguntas.forEach(([id, item]) => {
         const div = document.createElement('div');
         div.className = 'faq-item';
-        div.innerHTML = `<strong>📝 ${item.pergunta}</strong><br><em>por ${item.autor || "Anônimo"}</em>`;
+        const autor = item.autor || "Anônimo";
+        const icone = autor.charAt(0).toUpperCase();
+        const dataHora = item.timestamp ? formatarData(item.timestamp) : '';
+        div.innerHTML = `
+          <strong>📝 ${item.pergunta}</strong><br>
+          <div style="margin: 6px 0;">
+            <span class="autor-icon">${icone}</span>
+            <em>${autor} em ${dataHora}</em>
+          </div>
+        `;
+
+        // Campo de resposta embutido
+        const respostaInput = document.createElement('textarea');
+        respostaInput.className = "resposta-input";
+        respostaInput.placeholder = "Digite sua resposta (máx 150 caracteres)";
+        respostaInput.maxLength = 150;
+
+        const contador = document.createElement('div');
+        contador.className = 'contador';
+        contador.textContent = 'Restam 150 caracteres';
+
+        respostaInput.addEventListener('input', () => {
+          const restantes = 150 - respostaInput.value.length;
+          contador.textContent = `Restam ${restantes} caracteres`;
+        });
+
+        const botaoResponder = document.createElement('button');
+        botaoResponder.textContent = "Responder";
+        botaoResponder.onclick = () => {
+          const resposta = respostaInput.value.trim();
+          if (!resposta) return alert("Digite uma resposta.");
+          const user = localStorage.getItem("faq_user") || "Anônimo";
+          const ref = db.ref(`faq/nissan/${id}/respostas`);
+          ref.once("value", snap => {
+            const respostas = snap.val() || [];
+            respostas.unshift(`${user}: ${resposta}`);
+            ref.set(respostas).then(carregarPerguntas);
+          });
+        };
+
+        div.appendChild(respostaInput);
+        div.appendChild(contador);
+        div.appendChild(botaoResponder);
+
+        // Exibe respostas existentes
+        if (item.respostas && Array.isArray(item.respostas)) {
+          item.respostas.forEach(resp => {
+            const respDiv = document.createElement('div');
+            respDiv.className = 'resposta';
+            respDiv.textContent = "🗨️ " + resp;
+            div.appendChild(respDiv);
+          });
+        }
+
         lista.appendChild(div);
       });
     });
