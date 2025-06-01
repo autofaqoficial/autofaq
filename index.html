@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Auto FAQ - Marcas</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+    :root {
+      --primary-color: #0066cc;
+      --secondary-color: #004a99;
+      --accent-color: #ffcc00;
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      border-bottom: 4px solid var(--accent-color);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-header {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .sub-header a {
+      background: linear-gradient(135deg, #ffcc00, #ffaa00);
+      color: #000;
+      padding: 0.7rem 1.4rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .sub-header a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
+    }
+
+    .sub-header a.animated {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+      }
+
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+      }
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .brand-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      cursor: pointer;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .brand-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand-card span {
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .donate-button {
+      background-color: transparent;
+      color: #000;
+      border: 2px dashed var(--primary-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 0.8rem;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .donate-button:hover {
+      background-color: rgba(0, 102, 204, 0.1);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      main h2 {
+        font-size: 1.3rem;
+      }
+
+      .brand-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+<script>
+    function copyPix() {
+      navigator.clipboard.writeText('autofaq@gmail.com').then(function () {
+        alert('Chave PIX copiada! PIX: autofaq@gmail.com');
+      }, function (err) {
+        alert('Erro ao copiar PIX');
+      });
+    }
+
+    window.onload = function () {
+      const parceiroBtn = document.querySelector('.sub-header a[href="menu.html"]');
+      if (parceiroBtn) {
+        parceiroBtn.classList.add('animated');
+      }
+    };
+  
+    function loginAnonimo() {
+      const nome = "usuário/" + Math.floor(Math.random() * 100000);
+      alert("Você entrou como: " + nome);
+      localStorage.setItem('faq_user', nome);
+    }
+</script>
+</head>
+<body>
+<header>
+<h1>Auto FAQ</h1>
+<div class="sub-header">
+<a href="menu.html">🌟 Seja um Parceiro</a>
+</div>
+</header>
+<main>
+<h2>Escolha uma marca para visualizar perguntas frequentes</h2>
+<div class="brand-grid">
+<div class="brand-card" onclick="location.href='fiat.html'"><span>Fiat</span></div>
+<div class="brand-card" onclick="location.href='chevrolet.html'"><span>Chevrolet</span></div>
+<div class="brand-card" onclick="location.href='renault.html'"><span>Renault</span></div>
+<div class="brand-card" onclick="location.href='nissan.html'"><span>Nissan</span></div>
+</div>
+</main>
+<footer>
+    © 2025 Auto FAQ. Todos os direitos reservados.<br/>
+<a class="donate-button" href="javascript:void(0)" onclick="copyPix()">💛 Ajude o desenvolvedor</a>
+</footer>
+</body>
+</html>
