@@ -4,23 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoFAQ Novo Topo 2</title>
+  <title>AutoFAQ Topo Ajustado</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       overflow-x: hidden;
-      background: #f9f9f9;
+      background: #fff;
     }
 
     .topo {
       position: relative;
       width: 100vw;
-      height: 30vh;
+      height: 56.25vw; /* proporção 9:16 */
       background-image: url('faq2.png');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1;
     }
 
     .topo-conteudo {
@@ -41,33 +43,35 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 2rem;
       color: white;
+      z-index: 3;
     }
 
     .menu-icon {
       font-size: 2rem;
       color: white;
       cursor: pointer;
+      z-index: 3;
     }
 
     .faq-button {
-      display: block;
-      margin: -1.5rem auto 0.5rem auto;
-      padding: 0.75rem 1.5rem;
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      padding: 0.6rem 1.2rem;
       background-color: #3498db;
       color: white;
       border: none;
       border-radius: 25px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       cursor: pointer;
       z-index: 3;
-      position: relative;
     }
 
     #faq-menu {
       display: none;
-      text-align: center;
-      margin-top: 0.5rem;
+      text-align: left;
+      margin: 1rem;
       z-index: 3;
       position: relative;
     }
@@ -122,9 +126,9 @@
     <div class="titulo-topo">AutoFAQ</div>
     <div class="menu-icon" onclick="openMenu()">&#9776;</div>
   </div>
+  <button class="faq-button" onclick="toggleFAQMenu()">Entrar na FAQ</button>
 </div>
 
-<button class="faq-button" onclick="toggleFAQMenu()">Entrar na FAQ</button>
 <div id="faq-menu">
   <a href="#">Nissan</a>
   <a href="#">GM</a>
