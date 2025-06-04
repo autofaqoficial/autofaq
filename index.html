@@ -175,7 +175,7 @@
     <h1>AutoFAQ</h1>
     <button class="menu-dots" onclick="toggleDotsMenu()">≡</button>
     <div class="menu-list" id="menuList">
-      <a href="#">FAQ</a>
+      <a href="faq.html?secao=faq">FAQ</a>
       <a href="#">Parceiros</a>
       <a href="#">Contatos</a>
     </div>
@@ -190,7 +190,7 @@
     <div class="nav-arrow nav-left" onclick="prevSlide()">❮</div>
     <div class="nav-arrow nav-right" onclick="nextSlide()">❯</div>
     <div class="floating-btns">
-      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?marca=nissan'">Entrar FAQ</div>
+      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?secao=faq'">Entrar FAQ</div>
       <div class="floating-btn" id="btn2" onclick="location.href='faq.html?marca=fiat'">Parceiros</div>
       <div class="floating-btn" id="btn3" onclick="location.href='faq.html?marca=renault'">Contatos</div>
     </div>
@@ -232,7 +232,6 @@
       updateCarousel();
     }
 
-    // Touch support
     let startX = 0;
     const carousel = document.getElementById('carousel');
     carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
@@ -242,11 +241,9 @@
       else if (endX - startX > 50) prevSlide();
     });
 
-    // Auto-rotate
     setInterval(() => nextSlide(), 5000);
     updateCarousel();
 
-    // Menu hambúrguer
     function toggleDotsMenu() {
       const menu = document.getElementById('menuList');
       menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
