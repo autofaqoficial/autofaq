@@ -126,6 +126,7 @@
     }
 
     .image-placeholder {
+  background-color: #fff;
       background: #ccc;
       height: 200px;
       display: flex;
@@ -133,7 +134,105 @@
       justify-content: center;
       color: #555;
     }
-  </style>
+  
+    .faq-toggle {
+      display: block;
+      margin: 0 auto 1rem auto;
+      padding: 0.8rem 1.5rem;
+      background-color: #2c3e50;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .faq-toggle:hover {
+      background-color: #1e2a38;
+    }
+
+    .brand-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      text-align: center;
+    }
+
+    .brand-list a {
+      display: block;
+      padding: 0.6rem;
+      color: #2c3e50;
+      font-weight: bold;
+      text-decoration: none;
+      background-color: #ecf0f1;
+      margin: 4px auto;
+      max-width: 200px;
+      border-radius: 12px;
+    }
+
+    .brand-list a:hover {
+      background-color: #d0d3d4;
+    }
+
+    .brand-list.show {
+      max-height: 300px;
+    }
+
+    .faq-floating-container {
+      position: absolute;
+      top: 75vh;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .faq-toggle {
+      padding: 0.8rem 1.5rem;
+      background-color: #2c3e50;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      pointer-events: all;
+    }
+
+    .faq-toggle:hover {
+      background-color: #1e2a38;
+    }
+
+    .brand-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      pointer-events: all;
+    }
+
+    .brand-list a {
+      display: block;
+      padding: 0.6rem;
+      color: #2c3e50;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .brand-list a:hover {
+      background-color: #d0d3d4;
+    }
+
+    .brand-list.show {
+      max-height: 300px;
+    }
+</style>
 </head>
 <body>
 
@@ -161,8 +260,26 @@
 </div>
 
 <div class="section">
-  <h2>FAQ por marcas</h2>
+  
+  
+<div class="faq-floating-container">
+  <button class="faq-toggle" onclick="toggleBrandList()">FAQ por marcas</button>
+  <div id="brand-list" class="brand-list">
+    <a href="#">Nissan</a>
+    <a href="#">GM</a>
+    <a href="#">Fiat</a>
+    <a href="#">Peugeot</a>
+  </div>
+</div>
+
+  <div id="brand-list" class="brand-list">
+    <a href="#">Nissan</a>
+    <a href="#">GM</a>
+    <a href="#">Fiat</a>
+    <a href="#">Peugeot</a>
+  </div>
   <div class="carousel-container">
+
     <div class="carousel-slide" id="carouselSlide">
       <img src="kicks1.webp" alt="Nissan Kicks">
       <img src="spin.jpg" alt="GM Spin">
@@ -210,6 +327,11 @@ function openMenu() {
 function closeMenu() {
   document.getElementById("sideMenu").style.width = "0";
 }
+
+  function toggleBrandList() {
+    const list = document.getElementById("brand-list");
+    list.classList.toggle("show");
+  }
 </script>
 
 </body>
