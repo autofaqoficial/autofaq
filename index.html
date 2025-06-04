@@ -1,377 +1,218 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoFAQ</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AutoFAQ - Carrossel Corrigido</title>
   <style>
+    :root {
+      --primary: #004aad;
+      --accent: #a3c9f9;
+      --bg: #f2f2f2;
+      --text: #1a1a1a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
-
     header {
-      background-color: #1e2a38;
-      color: white;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-
-    .menu-icon {
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    nav {
-      height: 100%;
-      width: 0;
       position: fixed;
       top: 0;
-      right: 0;
-      background-color: #2c3e50;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 999;
-    }
-
-    nav a {
-      padding: 12px 24px;
-      text-decoration: none;
-      font-size: 1.1rem;
+      left: 0;
+      width: 100%;
+      background: var(--primary);
       color: white;
-      display: block;
-    }
-
-    nav a:hover {
-      background-color: #34495e;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    .banner {
-      background-color: #3498db;
-      color: white;
-      padding: 3rem 1rem;
+      padding: 1.2rem;
       text-align: center;
+      border-bottom: 5px solid var(--accent);
+      z-index: 1001;
     }
-
-    .section {
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: auto;
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
     }
-
-    .section h2 {
-      color: #2c3e50;
-    }
-
     .carousel-container {
-      overflow: hidden;
-      position: relative;
-      max-width: 100%;
-      margin: 0 auto;
-      position: relative;
+      position: fixed;
+      top: 70px;
+      left: 0;
       width: 100%;
-      height: 56.25vw;
-      margin: 0 auto;
+      height: 225px;
       overflow: hidden;
+      border-bottom: 2px solid #ccc;
+      z-index: 1000;
+      background: #fff;
     }
-
-    .carousel-slide {
+    .carousel-track {
       display: flex;
-      min-width: 100%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
+      transition: transform 0.6s ease;
+      height: 225px;
+      touch-action: pan-y;
     }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
+    .carousel-track img {
+      width: 100vw;
+      height: 225px;
       object-fit: cover;
       flex-shrink: 0;
+      user-select: none;
     }
-
-    .carousel-buttons {
+    .floating-btns {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 1001;
+    }
+    .floating-btn {
+      background: var(--accent);
+      color: #000;
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .floating-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .floating-btn:hover {
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      transform: scale(1.05);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .nav-arrow {
       position: absolute;
       top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
       transform: translateY(-50%);
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
-
-    .carousel-buttons button {
-      background-color: rgba(0, 0, 0, 0.5);
-      border: none;
+      font-size: 2rem;
+      background: rgba(0,0,0,0.3);
       color: white;
-      padding: 10px;
+      padding: 0.5rem;
       cursor: pointer;
-      font-size: 1.2rem;
+      z-index: 1002;
+      user-select: none;
     }
-
+    .nav-arrow:hover {
+      background: rgba(0,0,0,0.6);
+    }
+    .nav-left { left: 10px; }
+    .nav-right { right: 10px; }
+    main {
+      margin-top: 295px;
+      padding: 1rem;
+    }
+    .parceiro {
+      background: #fff;
+      margin: 2rem auto;
+      padding: 1rem;
+      max-width: 800px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .parceiro h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .parceiro p { font-size: 1rem; margin-bottom: 1rem; }
+    .parceiro img { max-width: 100%; border-radius: 10px; }
     footer {
-      background-color: #1e2a38;
+      background: var(--primary);
       color: white;
       text-align: center;
       padding: 1rem;
-    }
-
-    .image-placeholder {
-      background-color: #ffffff !important;
-      background: #ccc;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-    }
-
-    .faq-toggle {
-      background-color: #85c1e9;
-      font-family: 'Segoe UI', sans-serif;
-      display: block;
-      margin: 0 auto 1rem auto;
-      padding: 0.8rem 1.5rem;
-      background-color: #2c3e50;
-      color: white;
-      font-size: 1rem;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .faq-toggle:hover {
-      background-color: #1e2a38;
-    }
-
-    
-    .brand-list {
-      margin-top: 0.5rem;
-      margin-left: 0;
-      padding-left: 0;
-      width: 100%;
-      max-width: 220px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s ease;
-      text-align: center;
-    }
-
-    .brand-list a {
-      display: block;
-      padding: 0.6rem;
-      color: #2c3e50;
-      font-weight: bold;
-      text-decoration: none;
-      background-color: #ecf0f1;
-      margin: 4px auto;
-      max-width: 200px;
-      border-radius: 12px;
-    }
-
-    .brand-list a:hover {
-      background-color: #d0d3d4;
-    }
-
-    .brand-list.show {
-      max-height: 300px;
-    }
-
-    .faq-floating-container {
-      align-items: flex-start;
-      padding-left: 1rem;
-      position: absolute;
-      top: 75vh;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      pointer-events: none;
-    }
-
-    .faq-toggle {
-      background-color: #85c1e9;
-      font-family: 'Segoe UI', sans-serif;
-      padding: 0.8rem 1.5rem;
-      background-color: #2c3e50;
-      color: white;
-      font-size: 1rem;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background 0.3s;
-      pointer-events: all;
-    }
-
-    .faq-toggle:hover {
-      background-color: #1e2a38;
-    }
-
-    
-    .brand-list {
-      margin-top: 0.5rem;
-      margin-left: 0;
-      padding-left: 0;
-      width: 100%;
-      max-width: 220px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s ease;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      pointer-events: all;
-    }
-
-    .brand-list a {
-      display: block;
-      padding: 0.6rem;
-      color: #2c3e50;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .brand-list a:hover {
-      background-color: #d0d3d4;
-    }
-
-    .brand-list.show {
-      max-height: 300px;
+      margin-top: 2rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
-
-<div
-  style="position: fixed; top: 0.5rem; left: 1rem; z-index: 20; font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #2c3e50;">
-  AutoFAQ
-</div>
-
 <body>
+  <header>
+    <h1>AutoFAQ</h1>
+  </header>
 
-  <!-- header removido -->
-
-
-  <!-- fim do header -->
-
-  <nav id="sideMenu">
-    <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="#">Início</a>
-    <a href="#">Sobre</a>
-    <a href="#">Marcas</a>
-    <a href="#">Contato</a>
-  </nav>
-
-  <div class="section">
-
-    <div class="image-placeholder"><img src="faq2.png" alt="Imagem AutoFAQ"
-        style="width: 100%; height: auto; display: block;">
+  <div class="carousel-container" id="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <img src="faq2.png" alt="Banner 1" />
+      <img src="motor-de-carro.jpg" alt="Banner 2" />
+      <img src="pneu.png" alt="Banner 3" />
     </div>
-
-    <div style="padding: 1rem 1rem 0 1rem; display: flex; flex-direction: column; align-items: flex-start;">
-      <button class="faq-toggle" onclick="toggleBrandList()" style="margin-left: 0;">Faq por Marcas </button>
-      <div id="brand-list" class="brand-list" style="margin-left: 0;">
-        <a href="#">Nissan</a>
-        <a href="#">GM</a>
-        <a href="#">Fiat</a>
-        <a href="#">Peugeot</a>
-      </div>
+    <div class="nav-arrow nav-left" onclick="prevSlide()">❮</div>
+    <div class="nav-arrow nav-right" onclick="nextSlide()">❯</div>
+    <div class="floating-btns">
+      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?marca=nissan'">Nissan</div>
+      <div class="floating-btn" id="btn2" onclick="location.href='faq.html?marca=fiat'">Fiat</div>
+      <div class="floating-btn" id="btn3" onclick="location.href='faq.html?marca=renault'">Renault</div>
     </div>
-    <!-- fim banner -->
+  </div>
 
+  <main>
+    <section class="parceiro">
+      <h2>🌟 Destaque para Parceiros</h2>
+      <p>Seja um parceiro do AutoFAQ e destaque sua oficina, loja ou serviço automotivo para milhares de motoristas!</p>
+      <img src="motor-de-carro.jpg" alt="Motor" />
+    </section>
+  </main>
 
-    <div class="section">
+  <footer>
+    © 2025 AutoFAQ - Todos os direitos reservados.<br>
+    Desenvolvido com 🚘 para motoristas.
+  </footer>
 
+  <script>
+    let index = 0;
+    const track = document.getElementById('carouselTrack');
+    const total = track.children.length;
+    const buttons = [document.getElementById('btn1'), document.getElementById('btn2'), document.getElementById('btn3')];
 
+    function updateCarousel() {
+      track.style.transform = `translateX(-${index * 100}vw)`;
+      buttons.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+    }
 
-      <div class="carousel-container">
+    function nextSlide() {
+      index = (index + 1) % total;
+      updateCarousel();
+    }
 
-        <div class="carousel-slide" id="carouselSlide">
+    function prevSlide() {
+      index = (index - 1 + total) % total;
+      updateCarousel();
+    }
 
-        </div>
-        <div class="carousel-buttons">
-          <button onclick="prevSlide()">&#10094;</button>
-          <button onclick="nextSlide()">&#10095;</button>
-        </div>
+    // Touch support
+    let startX = 0;
+    const carousel = document.getElementById('carousel');
 
-      </div>
+    carousel.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
 
+    carousel.addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) nextSlide();
+      else if (endX - startX > 50) prevSlide();
+    });
 
-      <div class="section">
-        <h2>Seja um parceiro</h2>
-        <div class="image-placeholder">image3</div>
-      </div>
+    // Auto-rotate
+    setInterval(() => {
+      nextSlide();
+    }, 5000);
 
-      <footer>
-        &copy; 2025 AutoFAQ - Todos os direitos reservados.
-      </footer>
-
-      <script>
-        let slideIndex = 0;
-        const slide = document.getElementById('carouselSlide');
-        const totalSlides = 2;
-
-        function showSlide(index) {
-          slide.style.transform = 'translateX(' + (-index * 100) + '%)';
-        }
-
-        function nextSlide() {
-          slideIndex = (slideIndex + 1) % totalSlides;
-          showSlide(slideIndex);
-        }
-
-        function prevSlide() {
-          slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
-          showSlide(slideIndex);
-        }
-
-        setInterval(nextSlide, 5000);
-
-        function openMenu() {
-          document.getElementById("sideMenu").style.width = "250px";
-        }
-        function closeMenu() {
-          document.getElementById("sideMenu").style.width = "0";
-        }
-
-        function toggleBrandList() {
-          const list = document.getElementById("brand-list");
-          list.classList.toggle("show");
-        }
-      </script>
-
+    updateCarousel();
+  </script>
 </body>
-
 </html>
