@@ -27,14 +27,47 @@
       width: 100%;
       background: var(--primary);
       color: white;
-      padding: 1.2rem;
-      text-align: center;
+      padding: 1.2rem 3rem 1.2rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 5px solid var(--accent);
       z-index: 1001;
     }
     header h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2rem;
+    }
+    .menu-dots {
+      font-size: 2rem;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: white;
+      position: relative;
+    }
+    .menu-list {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: white;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 2000;
+    }
+    .menu-list a {
+      padding: 0.8rem 1.2rem;
+      text-decoration: none;
+      color: var(--primary);
+      border-bottom: 1px solid #ccc;
+    }
+    .menu-list a:last-child { border-bottom: none; }
+    .menu-list a:hover {
+      background: #f0f0f0;
     }
     .carousel-container {
       position: fixed;
@@ -140,6 +173,12 @@
 <body>
   <header>
     <h1>AutoFAQ</h1>
+    <button class="menu-dots" onclick="toggleDotsMenu()">≡</button>
+    <div class="menu-list" id="menuList">
+      <a href="#">FAQ</a>
+      <a href="#">Parceiros</a>
+      <a href="#">Contatos</a>
+    </div>
   </header>
 
   <div class="carousel-container" id="carousel">
@@ -151,9 +190,9 @@
     <div class="nav-arrow nav-left" onclick="prevSlide()">❮</div>
     <div class="nav-arrow nav-right" onclick="nextSlide()">❯</div>
     <div class="floating-btns">
-      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?marca=nissan'">Nissan</div>
-      <div class="floating-btn" id="btn2" onclick="location.href='faq.html?marca=fiat'">Fiat</div>
-      <div class="floating-btn" id="btn3" onclick="location.href='faq.html?marca=renault'">Renault</div>
+      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?marca=nissan'">Entrar FAQ</div>
+      <div class="floating-btn" id="btn2" onclick="location.href='faq.html?marca=fiat'">Parceiros</div>
+      <div class="floating-btn" id="btn3" onclick="location.href='faq.html?marca=renault'">Contatos</div>
     </div>
   </div>
 
@@ -196,11 +235,7 @@
     // Touch support
     let startX = 0;
     const carousel = document.getElementById('carousel');
-
-    carousel.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-    });
-
+    carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     carousel.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
       if (startX - endX > 50) nextSlide();
@@ -208,11 +243,14 @@
     });
 
     // Auto-rotate
-    setInterval(() => {
-      nextSlide();
-    }, 5000);
-
+    setInterval(() => nextSlide(), 5000);
     updateCarousel();
+
+    // Menu hambúrguer
+    function toggleDotsMenu() {
+      const menu = document.getElementById('menuList');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
   </script>
 </body>
 </html>
