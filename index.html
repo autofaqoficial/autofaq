@@ -1,253 +1,182 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AutoFAQ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clube Nissan Kicks Táxi</title>
   <style>
-    :root {
-      --primary: #004aad;
-      --accent: #a3c9f9;
-      --bg: #f2f2f2;
-      --text: #1a1a1a;
+    * {
+      box-sizing: border-box;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f7f7;
     }
+
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      padding: 1.2rem 3rem 1.2rem 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 5px solid var(--accent);
-      z-index: 1001;
-    }
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-    }
-    .menu-dots {
-      font-size: 2rem;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      color: white;
       position: relative;
+      padding: 20px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .menu-list {
+
+    header img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .menu-button {
       position: absolute;
-      top: 60px;
-      right: 10px;
-      background: white;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-      border-radius: 8px;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 3;
+    }
+
+    .menu-button div {
+      height: 4px;
+      background-color: #333;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-content {
       display: none;
       flex-direction: column;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 2000;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      animation: slideDown 0.4s ease;
+      z-index: 2;
     }
-    .menu-list a {
-      padding: 0.8rem 1.2rem;
+
+    .menu-content a {
+      padding: 12px 16px;
       text-decoration: none;
-      color: var(--primary);
-      border-bottom: 1px solid #ccc;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+      transition: background 0.2s;
     }
-    .menu-list a:last-child { border-bottom: none; }
-    .menu-list a:hover {
+
+    .menu-content a:hover {
       background: #f0f0f0;
     }
-    .carousel-container {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      height: 225px;
-      overflow: hidden;
-      border-bottom: 2px solid #ccc;
-      z-index: 1000;
-      background: #fff;
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.6s ease;
-      height: 225px;
-      touch-action: pan-y;
-    }
-    .carousel-track img {
-      width: 100vw;
-      height: 225px;
-      object-fit: cover;
-      flex-shrink: 0;
-      user-select: none;
-    }
-    .floating-btns {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      z-index: 1001;
-    }
-    .floating-btn {
-      background: var(--accent);
-      color: #000;
-      border-radius: 50px;
-      padding: 0.4rem 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-      animation: pulse 2s infinite;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .floating-btn.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .floating-btn:hover {
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      transform: scale(1.05);
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      background: rgba(0,0,0,0.3);
-      color: white;
-      padding: 0.5rem;
-      cursor: pointer;
-      z-index: 1002;
-      user-select: none;
-    }
-    .nav-arrow:hover {
-      background: rgba(0,0,0,0.6);
-    }
-    .nav-left { left: 10px; }
-    .nav-right { right: 10px; }
-    main {
-      margin-top: 295px;
-      padding: 1rem;
-    }
-    .parceiro {
-      background: #fff;
-      margin: 2rem auto;
-      padding: 1rem;
-      max-width: 800px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .parceiro h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .parceiro p { font-size: 1rem; margin-bottom: 1rem; }
-    .parceiro img { max-width: 100%; border-radius: 10px; }
-    footer {
-      background: var(--primary);
-      color: white;
+
+    .container {
       text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.9rem;
+      padding: 20px;
+    }
+
+    .highlights {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .highlight {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+      border: 3px solid #FFCC00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #333;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .highlight:hover {
+      transform: scale(1.08);
+      border-color: #e6b800;
+    }
+
+    @media (max-width: 600px) {
+      .highlight {
+        width: 70px;
+        height: 70px;
+        font-size: 1em;
+      }
+
+      header h1 {
+        font-size: 1.2em;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>AutoFAQ</h1>
-    <button class="menu-dots" onclick="toggleDotsMenu()">≡</button>
-    <div class="menu-list" id="menuList">
-      <a href="faq.html?secao=faq">FAQ</a>
-      <a href="#">Parceiros</a>
-      <a href="#">Contatos</a>
-    </div>
-  </header>
 
-  <div class="carousel-container" id="carousel">
-    <div class="carousel-track" id="carouselTrack">
-      <img src="faq2.png" alt="Banner 1" />
-      <img src="motor-de-carro.jpg" alt="Banner 2" />
-      <img src="pneu.png" alt="Banner 3" />
-    </div>
-    <div class="nav-arrow nav-left" onclick="prevSlide()">❮</div>
-    <div class="nav-arrow nav-right" onclick="nextSlide()">❯</div>
-    <div class="floating-btns">
-      <div class="floating-btn active" id="btn1" onclick="location.href='faq.html?secao=faq'">Entrar FAQ</div>
-      <div class="floating-btn" id="btn2" onclick="location.href='faq.html?marca=fiat'">Parceiros</div>
-      <div class="floating-btn" id="btn3" onclick="location.href='faq.html?marca=renault'">Contatos</div>
-    </div>
+<header>
+  <img src="/logo-taxi.png" alt="Logo">
+  <h1>Clube Nissan Kicks Táxi</h1>
+  <div class="menu-button" onclick="toggleMenu(event)">
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
+  <div class="menu-content" id="menu">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+  </div>
+</header>
 
-  <main>
-    <section class="parceiro">
-      <h2>🌟 Destaque para Parceiros</h2>
-      <p>Seja um parceiro do AutoFAQ e destaque sua oficina, loja ou serviço automotivo para milhares de motoristas!</p>
-      <img src="motor-de-carro.jpg" alt="Motor" />
-    </section>
-  </main>
+<div class="container">
+  <div class="highlights">
+    <div class="highlight" style="background-image: url('capa1.jpg');">1</div>
+    <div class="highlight" style="background-image: url('capa2.jpg');">2</div>
+    <div class="highlight" style="background-image: url('capa3.jpg');">3</div>
+    <div class="highlight" style="background-image: url('capa4.jpg');">4</div>
+  </div>
+</div>
 
-  <footer>
-    © 2025 AutoFAQ - Todos os direitos reservados.<br>
-    Desenvolvido com 🚘 para motoristas.
-  </footer>
+<script>
+  function toggleMenu(event) {
+    event.stopPropagation();
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+  }
 
-  <script>
-    let index = 0;
-    const track = document.getElementById('carouselTrack');
-    const total = track.children.length;
-    const buttons = [document.getElementById('btn1'), document.getElementById('btn2'), document.getElementById('btn3')];
-
-    function updateCarousel() {
-      track.style.transform = `translateX(-${index * 100}vw)`;
-      buttons.forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-      });
+  document.addEventListener('click', function(event) {
+    const menu = document.getElementById('menu');
+    const menuButton = document.querySelector('.menu-button');
+    if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+      menu.style.display = 'none';
     }
+  });
+</script>
 
-    function nextSlide() {
-      index = (index + 1) % total;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      index = (index - 1 + total) % total;
-      updateCarousel();
-    }
-
-    let startX = 0;
-    const carousel = document.getElementById('carousel');
-    carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    carousel.addEventListener('touchend', e => {
-      const endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) nextSlide();
-      else if (endX - startX > 50) prevSlide();
-    });
-
-    setInterval(() => nextSlide(), 5000);
-    updateCarousel();
-
-    function toggleDotsMenu() {
-      const menu = document.getElementById('menuList');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
 </body>
 </html>
