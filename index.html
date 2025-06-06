@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site com Carrossel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Site</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <!-- // topo do site -->
+  <!-- // container do topo -->
   <div class="top-bar">
-    <div class="logo">Microsoft Clone</div>
+    <div class="logo">Meu Site</div>
     <div class="nav-links">
-      <a href="#">Produtos</a>
-      <a href="#">Serviços</a>
+      <a href="#">Início</a>
+      <a href="#">Galeria</a>
       <a href="#">Contato</a>
     </div>
   </div>
 
-  <!-- // banner principal com carrossel -->
+  <!-- // container do banner com botoes internos -->
   <section class="main-banner">
     <div class="carousel">
       <img id="bannerImage" src="images/banner1.jpg" alt="Banner" />
-      <div class="controls">
+      <div class="controls-inside">
         <button onclick="prevImage()">⟨</button>
         <button onclick="togglePlay()" id="playPauseBtn">⏸</button>
         <button onclick="nextImage()">⟩</button>
@@ -30,7 +32,7 @@
     </div>
   </section>
 
-  <!-- // seção do meio -->
+  <!-- // container dos produtos -->
   <section class="mid-section">
     <div class="card">
       <img src="images/produto1.jpg" alt="Produto 1" />
@@ -51,9 +53,10 @@
 
   <!-- // rodapé -->
   <footer class="footer">
-    <p>© 2025 - Site com Carrossel</p>
+    <p>© 2025 - Meu Site</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>
