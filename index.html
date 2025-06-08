@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,7 +20,7 @@
 
     <!-- Botão 1: FAQ -->
     <div class="botao-wrapper">
-      <div class="highlight" onclick="window.location.href='https://www.google.com'">
+      <div class="highlight faq" onclick="mostrarFAQ()">
         <img src="imagens/botao_faq.png" alt="FAQ">
       </div>
       <div class="label">FAQ</div>
@@ -27,7 +28,7 @@
 
     <!-- Botão 2: Parceiros -->
     <div class="botao-wrapper">
-      <div class="highlight">
+      <div class="highlight parceiros">
         <img src="imagens/parceiros.png" alt="Parceiros">
       </div>
       <div class="label">Parceiros</div>
@@ -35,31 +36,36 @@
 
     <!-- Botão 3: Manual -->
     <div class="botao-wrapper">
-      <div class="highlight">
-        <img src="imagens/manual.png" alt="Manual" style="width: 82%; height: 82%;">
+      <div class="highlight manual">
+        <img src="imagens/manual.png" alt="Manual">
       </div>
       <div class="label">Manual</div>
     </div>
 
     <!-- Botão 4: Contatos com submenu -->
     <div class="botao-wrapper" onclick="toggleSubmenu(event)">
-      <div class="highlight">
-        <img src="imagens/botao-contatos.png" alt="Contatos" style="width: 82%; height: 82%;">
+      <div class="highlight contatos">
+        <img src="imagens/botao-contatos.png" alt="Contatos">
       </div>
       <div class="label">Contatos</div>
       <div class="submenu" id="submenu">
         <div class="submenu-item" onclick="window.location.href='https://instagram.com'">
-          <img src="imagens/instagram.png" alt="Instagram"> @instagram
+          <img class="icon-instagram" src="imagens/instagram.png" alt="Instagram"> @instagram
         </div>
         <div class="submenu-item" onclick="window.location.href='https://facebook.com'">
-          <img src="imagens/facebook.png" alt="Facebook"> @facebook
+          <img class="icon-facebook" src="imagens/facebook.png" alt="Facebook"> @facebook
         </div>
         <div class="submenu-item" onclick="window.location.href='https://youtube.com'">
-          <img src="imagens/youtube.png" alt="YouTube"> @youtube
+          <img class="icon-youtube" src="imagens/youtube.png" alt="YouTube"> @youtube
         </div>
       </div>
     </div>
 
+  </div>
+
+  <!-- Container do FAQ -->
+  <div id="faq-container" style="display:none; margin-top:40px;">
+    <iframe src="faq.html" width="100%" height="1000" style="border:none;"></iframe>
   </div>
 </div>
 
