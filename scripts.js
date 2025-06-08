@@ -12,18 +12,20 @@ document.addEventListener('click', function () {
 
 function mostrarFAQ() {
   const container = document.getElementById('faq-container');
-  if (container.style.display === 'block') {
-    container.style.display = 'none';
-  } else {
-    container.style.display = 'block';
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }
+  const iframe = document.getElementById('faq-frame');
+  iframe.src = "acessofaq.html";
+  container.style.display = 'block';
 }
 
-window.addEventListener('message', function(event) {
-  if (event.data === 'fecharFAQ') {
-    const container = document.getElementById('faq-container');
-    if (container) container.style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// Ouvinte para lidar com mensagens do iframe (faq.html ou acessofaq.html)
+window.addEventListener("message", function(event) {
+  const iframe = document.getElementById("faq-frame");
+  const container = document.getElementById("faq-container");
+
+  if (event.data === "abrirFAQCompleta") {
+    iframe.src = "faq.html";
+  } else if (event.data === "fecharFAQ") {
+    iframe.src = "";
+    container.style.display = "none";
   }
 });
