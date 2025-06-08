@@ -13,8 +13,9 @@ document.addEventListener('click', function (e) {
   const iframe = document.getElementById('faq-frame');
   const faqButton = document.querySelector('.highlight.faq');
 
-  // Se o FAQ está aberto e o clique foi fora do botão FAQ e fora do iframe
+  // Só permitir clique-fora se estivermos na acessofaq.html
   if (faqContainer.style.display === 'block' &&
+      iframe.src.includes("acessofaq.html") &&
       !faqButton.contains(e.target) &&
       !faqContainer.contains(e.target)) {
     iframe.src = "";
