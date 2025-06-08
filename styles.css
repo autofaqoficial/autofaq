@@ -357,3 +357,12 @@ header h1 {
   z-index: 900;
   margin-top: 20px;
 }
+
+
+@media (max-width: 600px) {
+  .submenu-servicos {
+    left: 10px !important;
+    right: auto !important;
+    width: calc(100% - 20px) !important;
+  }
+}
