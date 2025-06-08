@@ -163,6 +163,7 @@
   <div id="campoBusca" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #ccc;">
     <label for="pesquisar">Pesquisar:</label>
     <input type="text" id="pesquisar" placeholder="Buscar..." />
+<button onclick="aplicarFiltroPesquisa()">Pesquisar</button>
   </div>
 
   <div id="loginSection">
@@ -174,16 +175,16 @@
   <div id="faqSection" style="display: none;">
     <label for="pergunta">Sua pergunta:</label>
     <input type="text" id="pergunta" placeholder="Ex: Consumo do Nissan Versa" />
+<button id="btnTopo" onclick="voltarTopo()" style="margin-top:8px;">⬆️ Topo</button>
     <button onclick="salvarPergunta()">Enviar</button>
+<button onclick="carregarPerguntas()">🔄 Atualizar</button>
     <p id="status"></p>
 
     <h3 style="margin-top: 20px;">Perguntas já salvas:</h3>
     <div id="listaPerguntas"></div>
   </div>
 
-  <!-- Botão voltar ao topo -->
-  <button id="btnTopo" onclick="voltarTopo()">↑</button>
-
+  
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
