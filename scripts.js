@@ -1,3 +1,48 @@
+function closeAll() {
+  const ids = [
+    'faq-container',
+    'noticias-container',
+    'servicos-container',
+    'submenu-servicos',
+    'container-suspensao',
+    'container-troca-oleo',
+    'container-troca-oleo-cambio',
+    'container-mecanica',
+    'container-lanternagem',
+    'container-ar'
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
+function fecharTodosContainersPrincipais() {
+  const ids = [
+    "faq-container",
+    "noticias-container",
+    "servicos-container",
+    "container-suspensao",
+    "container-troca-oleo",
+    "container-troca-oleo-cambio",
+    "container-mecanica",
+    "container-lanternagem",
+    "container-ar"
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+}
+
+function ocultarContainersPrincipais() {
+  const ids = ['servicos-container', 'noticias-container', 'faq-container'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
 
 function toggleSubmenu(event) {
   event.stopPropagation();
@@ -24,8 +69,9 @@ document.addEventListener('click', function (e) {
 });
 
 function mostrarFAQ() {
-  const container = document.getElementById('faq-container');
-  const iframe = document.getElementById('faq-frame');
+  fecharTodosContainersPrincipais();
+  const container = document.getElementById("faq-container");
+  const iframe = document.getElementById("faq-frame");
   iframe.src = "acessofaq.html";
   container.style.display = 'block';
 }
@@ -56,13 +102,12 @@ document.addEventListener('click', function(event) {
   }
 });
 
-document.querySelector(".highlight.noticias").addEventListener("click", function () {
+document.querySelector(".highlight.noticias").addEventListener("click", function(e) {
+  e.stopPropagation();
+  closeAll();
   const container = document.getElementById("noticias-container");
-  if (container) {
-    container.style.display = (container.style.display === "none") ? "block" : "none";
-  }
+  if (container) container.style.display = "block";
 });
-
 document.addEventListener("click", function (event) {
   const noticiasContainer = document.getElementById("noticias-container");
   const noticiasBotao = document.querySelector(".highlight.noticias");
@@ -78,10 +123,9 @@ document.addEventListener("click", function (event) {
 });
 
 document.querySelector(".highlight.servicos").addEventListener("click", function () {
+  fecharTodosContainersPrincipais();
   const container = document.getElementById("servicos-container");
-  if (container) {
-    container.style.display = (container.style.display === "none") ? "block" : "none";
-  }
+  if (container) container.style.display = "block";
 });
 
 document.addEventListener("click", function (event) {
@@ -115,47 +159,13 @@ document.addEventListener("click", function (e) {
 });
 
 function abrirServicosCategoria(categoria) {
-  if (categoria === 'suspensao') {
-    const container = document.getElementById("servicos-container");
-    if (container) {
-      container.style.display = "block";
-    }
-  }
-}
-
-function abrirServicosCategoria(categoria) {
-  const ids = [
-    "container-suspensao",
-    "container-troca-oleo",
-    "container-troca-oleo-cambio",
-    "container-mecanica",
-    "container-lanternagem",
-    "container-ar"
-  ];
-
-  // Ocultar todos
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = "none";
-  });
-
-  // Mostrar o escolhido
+  fecharTodosContainersPrincipais();
+  const submenu = document.getElementById("submenu-servicos");
+  if (submenu) submenu.style.display = "none";
   const alvo = document.getElementById("container-" + categoria);
   if (alvo) alvo.style.display = "block";
 }
-
-let fecharSubmenuTimer;
-
-const submenuServicos = document.getElementById("submenu-servicos");
-
-if (submenuServicos) {
-  submenuServicos.addEventListener("mouseleave", () => {
-    fecharSubmenuTimer = setTimeout(() => {
-      submenuServicos.style.display = "none";
-    }, 3000);
-  });
-
-  submenuServicos.addEventListener("mouseenter", () => {
-    clearTimeout(fecharSubmenuTimer);
-  });
+function fecharContainer(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'none';
 }
