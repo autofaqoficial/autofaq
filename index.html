@@ -1,91 +1,74 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SouTaxi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.cdnfonts.com/css/cooper-black" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clube Nissan Kicks Táxi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <!-- Cabeçalho fixo -->
-  <header class="top-bar">
-    <div class="logo">
-      <div class="logo-top">
-      <span class="logo-s">S</span><span class="logo-ou">ou</span>
-    </div>
-      <div class="logo-bottom">taxi.com</div>
-    </div>
-    <nav class="nav-links">
-      <div class="menu-wrapper">
-        <a href="#" id="area-passageiro" class="link-nome pulsante" title="Em construção">Área do Passageiro</a><div class="hamburger-menu">
-          ☰
-          <div class="submenu">
-            <a href="#"> 1</a>
-            <a href="#"> 2</a>
-            <a href="#"> 3</a>
-            <a href="#"> 4</a>
-          </div>
-        </div>
-    </nav>
-  </header>
+<header>
+  <img src="imagens/logo_taxi.jpeg" class="logo" alt="Logo">
+  <h1>Clube Nissan Kicks Táxi</h1>
+</header>
 
-  <!-- Banner principal -->
-  <section class="main-banner">
-    <div class="carousel">
-      <img id="bannerImage" src="./imagens/banner1.jpg" alt="Banner" />
-      <div class="controls-inside">
-        <button onclick="prevImage()">⟨</button>
-        <button onclick="togglePlay()" id="playPauseBtn">⏸</button>
-        <button onclick="nextImage()">⟩</button>
+<div class="container">
+  <div class="highlights">
+
+    <!-- Botão 1: FAQ -->
+    <div class="botao-wrapper">
+      <div class="highlight faq" onclick="mostrarFAQ()">
+        <img src="imagens/botao_faq.png" alt="FAQ">
+      </div>
+      <div class="label">FAQ</div>
+    </div>
+
+    <!-- Botão 2: Parceiros -->
+    <div class="botao-wrapper">
+      <div class="highlight parceiros">
+        <img src="imagens/parceiros.png" alt="Parceiros">
+      </div>
+      <div class="label">Parceiros</div>
+    </div>
+
+    <!-- Botão 3: Manual -->
+    <div class="botao-wrapper">
+      <div class="highlight manual">
+        <img src="imagens/manual.png" alt="Manual">
+      </div>
+      <div class="label">Manual</div>
+    </div>
+
+    <!-- Botão 4: Contatos com submenu -->
+    <div class="botao-wrapper" onclick="toggleSubmenu(event)">
+      <div class="highlight contatos">
+        <img src="imagens/botao-contatos.png" alt="Contatos">
+      </div>
+      <div class="label">Contatos</div>
+      <div class="submenu" id="submenu">
+        <div class="submenu-item" onclick="window.location.href='https://instagram.com'">
+          <img class="icon-instagram" src="imagens/instagram.png" alt="Instagram"> @instagram
+        </div>
+        <div class="submenu-item" onclick="window.location.href='https://facebook.com'">
+          <img class="icon-facebook" src="imagens/facebook.png" alt="Facebook"> @facebook
+        </div>
+        <div class="submenu-item" onclick="window.location.href='https://youtube.com'">
+          <img class="icon-youtube" src="imagens/youtube.png" alt="YouTube"> @youtube
+        </div>
       </div>
     </div>
-  </section>
 
-<section class="grupo-bloco">
-  <h2 class="titulo-clubes">Clubes de Taxistas</h2>
-  <div class="grupo-grid">
-    <div class="grupo-card" onclick="window.open('https://chat.whatsapp.com/SEULINK-KICKS')">
-      <img src="./imagens/logo-nissan.png" alt="Ícone Kicks" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 10px;">
-      Clube Nissan Kicks Táxi
-    </div>
-    <div class="grupo-card destaque" onclick="alert('Em breve você poderá cadastrar seu grupo!')">
-      📢 Divulgue aqui seu grupo
-    </div>
   </div>
-</section>
 
+  <!-- Container do FAQ -->
+  <div id="faq-container" style="display:none; margin-top:40px;">
+    <iframe src="faq.html" width="100%" height="1000" style="border:none;"></iframe>
+  </div>
+</div>
 
-  <!-- Produtos -->
-  <section class="mid-section">
-    <div class="card">
-      <img src="./imagens/produto1.jpg" alt="Produto 1" />
-      <h3>Produto 1</h3>
-      <p>Descrição breve do produto 1.</p>
-    </div>
-    <div class="card">
-      <img src="./imagens/produto2.jpg" alt="Produto 2" />
-      <h3>Produto 2</h3>
-      <p>Descrição breve do produto 2.</p>
-    </div>
-    <div class="card">
-      <img src="./imagens/produto3.jpg" alt="Produto 3" />
-      <h3>Produto 3</h3>
-      <p>Descrição breve do produto 3.</p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>© 2025 - SouTaxi</p>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="scripts.js"></script>
 </body>
-
 </html>
