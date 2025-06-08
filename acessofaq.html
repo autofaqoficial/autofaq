@@ -66,6 +66,8 @@
   </div>
 
   <script>
+    let cliqueForaAtivo = true;
+
     window.onload = function() {
       const nomeSalvo = localStorage.getItem("faq_user");
       if (nomeSalvo) {
@@ -80,10 +82,12 @@
         return;
       }
       localStorage.setItem("faq_user", nome);
+      cliqueForaAtivo = false; // desativa o fechamento por clique fora
       parent.postMessage('abrirFAQCompleta', '*');
     }
 
     document.addEventListener("click", function(e) {
+      if (!cliqueForaAtivo) return;
       const caixa = document.getElementById("caixa-login");
       if (!caixa.contains(e.target)) {
         parent.postMessage("fecharFAQ", "*");

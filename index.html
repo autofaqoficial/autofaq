@@ -1,59 +1,47 @@
-
 <!DOCTYPE html>
 
 <html lang="pt-br">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clube Nissan Kicks Táxi</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Clube Nissan Kicks Táxi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
 </head>
+
 <body>
-<header>
-<img alt="Logo" class="logo" src="imagens/logo_taxi.jpeg"/>
-<h1>Clube Nissan Kicks Táxi</h1>
-</header>
-<div class="container">
-<div class="highlights"><div class="botao-wrapper">
-<div class="highlight parceiros">
-<img alt="Parceiros" src="imagens/parceiros.png"/>
-</div>
-<div class="label">Parceiros</div>
-</div><div class="botao-wrapper">
-<div class="highlight manual">
-<img alt="Manual" src="imagens/manual.png"/>
-</div>
-<div class="label">Manual</div>
-</div><div class="botao-wrapper">
-<div class="highlight faq" onclick="mostrarFAQ()">
-<img alt="FAQ" src="imagens/botao_faq.png"/>
-</div>
-<div class="label">FAQ</div>
-</div>
-<div class="botao-wrapper" onclick="toggleSubmenu(event)">
-<div class="highlight contatos">
-<img alt="Contatos" src="imagens/botao-contatos.png"/>
-</div>
-<div class="label">Contatos</div>
-<div class="submenu" id="submenu">
-<div class="submenu-item" onclick="window.location.href='https://instagram.com'">
-<img alt="Instagram" class="icon-instagram" src="imagens/instagram.png"/> @instagram
-    </div>
-<div class="submenu-item" onclick="window.location.href='https://facebook.com'">
-<img alt="Facebook" class="icon-facebook" src="imagens/facebook.png"/> @facebook
-    </div>
-<div class="submenu-item" onclick="window.location.href='https://youtube.com'">
-<img alt="YouTube" class="icon-youtube" src="imagens/youtube.png"/> @youtube
-    </div>
-</div>
-</div>
-</div>
-</div>
-<!-- FAQ Container at bottom -->
-<div id="faq-container" style="display:none; margin: 20px;">
-<iframe height="800" id="faq-frame" src="acessofaq.html" style="border:none;" width="100%"></iframe>
-</div>
-<script src="scripts.js"></script>
+    <header>
+        <img alt="Logo" class="logo" src="imagens/logo_taxi.jpeg" />
+        <h1>Clube Nissan Kicks Táxi</h1>
+    </header>
+    <div class="container">
+
+        <div class="highlights">
+            <div class="botao-wrapper">
+                <div class="highlight servicos">
+                    <img alt="Serviços" src="imagens/serv.png" />
+                </div>
+                <div class="label">Serviços</div>
+            </div>
+            <div class="botao-wrapper">
+                <div class="highlight manual">
+                    <img alt="Manual" src="imagens/manual.png" />
+                </div>
+                <div class="label">Manual Kicks</div>
+            </div>
+            <div class="botao-wrapper">
+                <div class="highlight faq" onclick="mostrarFAQ()">
+                    <img alt="FAQ" src="imagens/botao_faq.png" />
+                </div>
+                <div class="label">Perguntas Frequentes</div>
+            </div>
+
+            <!-- FAQ Container at bottom -->
+            <div id="faq-container" style="display:none; margin: 20px;">
+                <iframe height="800" id="faq-frame" src="acessofaq.html" style="border:none;" width="100%"></iframe>
+            </div>
+            <script src="scripts.js"></script>
 </body>
+
 </html>

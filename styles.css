@@ -81,24 +81,16 @@ header h1 {
 
 /* Ajustes individuais */
 .highlight.faq img {
-  width: 300%;
-  height: 300%;
+  width: 220%;
+  height: 220%;
 }
 
-.highlight.parceiros img {
-  width: 95%;
-  height: 95%;
-}
 
 .highlight.manual img {
   width: 82%;
   height: 82%;
 }
 
-.highlight.contatos img {
-  width: 82%;
-  height: 82%;
-}
 
 .label {
   margin-top: 6px;
