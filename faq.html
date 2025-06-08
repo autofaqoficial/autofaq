@@ -154,7 +154,7 @@
 <body>
 
   <div class="top-bar">
-    <button onclick="sair()">❌ Sair</button>
+    <button onclick="parent.postMessage('fecharFAQ', '*')">❌ Sair</button>
   </div>
 
   <h1>Faq Nissan Kicks</h1>
@@ -162,7 +162,7 @@
   <!-- Campo Pesquisar -->
   <div id="campoBusca" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #ccc;">
     <label for="pesquisar">Pesquisar:</label>
-    <input type="text" id="pesquisar" placeholder="Buscar..." />
+    <input type="text" id="pesquisar" placeholder="Buscar..." /> <button type="button" style="margin-left: 8px; padding: 10px 16px; font-size: 1rem;">OK</button>
   </div>
 
   <div id="loginSection">
@@ -185,22 +185,8 @@
   <button id="btnTopo" onclick="voltarTopo()">↑</button>
 
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js">
-    function sair() {
-      if (window.parent) {
-        window.parent.postMessage("fecharFAQ", "*");
-      }
-    }
-    </script>
-
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js">
-    function sair() {
-      if (window.parent) {
-        window.parent.postMessage("fecharFAQ", "*");
-      }
-    }
-    </script>
-
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -422,18 +408,11 @@
         carregarPerguntas();
       }
     };
-  
-    function sair() {
-      if (window.parent) {
-        window.parent.postMessage("fecharFAQ", "*");
-      }
-    }
-    </script>
-
+  </script>
 
 
   <div style="margin-top: 40px; text-align: center;">
-    <button onclick="sair()" style="background-color: #0066cc; color: white; padding: 10px 20px; font-size: 1rem; border: none; border-radius: 6px;">❌ Sair</button>
+    <button onclick="parent.postMessage('fecharFAQ', '*')" style="background-color: #0066cc; color: white; padding: 10px 20px; font-size: 1rem; border: none; border-radius: 6px;">❌ Sair</button>
   </div>
 </body>
 </html>
