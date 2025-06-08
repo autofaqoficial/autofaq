@@ -64,8 +64,8 @@ header h1 {
 }
 
 .highlight img {
-  width: 90%;
-  height: 90%;
+  width: 180%;
+  height: 180%;
   object-fit: contain;
 }
 
@@ -122,9 +122,9 @@ header h1 {
 }
 
 @media (max-width: 600px) {
-  .highlight img {
-    width: 95%;
-    height: 95%;
+  .highlight img[style] {
+    width: 82% !important;
+    height: 82% !important;
   }
   .highlight {
     width: 70px;
