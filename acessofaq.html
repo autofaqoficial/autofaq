@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Identificação para FAQ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004a99;
+    }
+  </style>
+</head>
+<body>
+  <h2>Digite seu Nome / Apelido</h2>
+  <input type="text" id="nome" placeholder="Ex: João Taxista" />
+  <button onclick="entrarFAQ()">Entrar na FAQ</button>
+
+  <script>
+    function entrarFAQ() {
+      const nome = document.getElementById("nome").value.trim();
+      if (!nome) {
+        alert("Por favor, digite seu nome.");
+        return;
+      }
+      localStorage.setItem("faq_user", nome);
+      parent.postMessage('abrirFAQCompleta', '*');
+    }
+  </script>
+</body>
+</html>
