@@ -1,3 +1,29 @@
+function fecharTodosContainersPrincipais() {
+  const ids = [
+    "faq-container",
+    "noticias-container",
+    "servicos-container",
+    "container-suspensao",
+    "container-troca-oleo",
+    "container-troca-oleo-cambio",
+    "container-mecanica",
+    "container-lanternagem",
+    "container-ar"
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+}
+
+function ocultarContainersPrincipais() {
+  const ids = ['servicos-container', 'noticias-container', 'faq-container'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
 
 function toggleSubmenu(event) {
   event.stopPropagation();
@@ -24,8 +50,9 @@ document.addEventListener('click', function (e) {
 });
 
 function mostrarFAQ() {
-  const container = document.getElementById('faq-container');
-  const iframe = document.getElementById('faq-frame');
+  fecharTodosContainersPrincipais();
+  const container = document.getElementById("faq-container");
+  const iframe = document.getElementById("faq-frame");
   iframe.src = "acessofaq.html";
   container.style.display = 'block';
 }
@@ -41,3 +68,85 @@ window.addEventListener("message", function(event) {
     container.style.display = "none";
   }
 });
+
+
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+document.addEventListener('click', function(event) {
+  const menu = document.getElementById("mobileMenu");
+  const hamburger = document.querySelector(".hamburger");
+  if (menu && hamburger && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+    menu.style.display = "none";
+  }
+});
+
+document.querySelector(".highlight.noticias").addEventListener("click", function () {
+  fecharTodosContainersPrincipais();
+  const container = document.getElementById("noticias-container");
+  if (container) container.style.display = "block";
+});
+
+document.addEventListener("click", function (event) {
+  const noticiasContainer = document.getElementById("noticias-container");
+  const noticiasBotao = document.querySelector(".highlight.noticias");
+  if (
+    noticiasContainer &&
+    noticiasBotao &&
+    noticiasContainer.style.display === "block" &&
+    !noticiasContainer.contains(event.target) &&
+    !noticiasBotao.contains(event.target)
+  ) {
+    noticiasContainer.style.display = "none";
+  }
+});
+
+document.querySelector(".highlight.servicos").addEventListener("click", function () {
+  fecharTodosContainersPrincipais();
+  const container = document.getElementById("servicos-container");
+  if (container) container.style.display = "block";
+});
+
+document.addEventListener("click", function (event) {
+  const servicosContainer = document.getElementById("servicos-container");
+  const servicosBotao = document.querySelector(".highlight.servicos");
+  if (
+    servicosContainer &&
+    servicosBotao &&
+    servicosContainer.style.display === "block" &&
+    !servicosContainer.contains(event.target) &&
+    !servicosBotao.contains(event.target)
+  ) {
+    servicosContainer.style.display = "none";
+  }
+});
+
+document.querySelector(".highlight.servicos").addEventListener("click", function (e) {
+  e.stopPropagation();
+  const submenu = document.getElementById("submenu-servicos");
+  submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
+});
+
+document.addEventListener("click", function (e) {
+  const submenu = document.getElementById("submenu-servicos");
+  const botaoServicos = document.querySelector(".highlight.servicos");
+  if (submenu && botaoServicos &&
+      !submenu.contains(e.target) &&
+      !botaoServicos.contains(e.target)) {
+    submenu.style.display = "none";
+  }
+});
+
+function abrirServicosCategoria(categoria) {
+  fecharTodosContainersPrincipais();
+  const submenu = document.getElementById("submenu-servicos");
+  if (submenu) submenu.style.display = "none";
+  const alvo = document.getElementById("container-" + categoria);
+  if (alvo) alvo.style.display = "block";
+}
+function fecharContainer(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'none';
+}

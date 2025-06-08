@@ -81,16 +81,24 @@ header h1 {
 
 /* Ajustes individuais */
 .highlight.faq img {
-  width: 220%;
-  height: 220%;
+  width: 300%;
+  height: 300%;
 }
 
+.highlight.noticias img {
+  width: 115%;
+  height: 115%;
+}
 
 .highlight.manual img {
   width: 82%;
   height: 82%;
 }
 
+.highlight.contatos img {
+  width: 82%;
+  height: 82%;
+}
 
 .label {
   margin-top: 6px;
@@ -182,4 +190,170 @@ header h1 {
 .icon-youtube {
   width: 20px;
   height: 20px;
+}
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  display: none;
+  font-size: 2rem;
+  padding: 12px;
+  cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #aaa;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: max-content;
+  min-width: 200px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.mobile-menu .menu-item {
+  padding: 14px 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4em;
+  color: #777;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu .menu-item:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+    display: block;
+  }
+
+  .highlights {
+    margin-top: 60px;
+  }
+}
+
+.noticias-container {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.noticias-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.noticia {
+  border-left: 4px solid #888;
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+
+.noticia-data {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.noticia-texto {
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.servicos-container {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.servicos-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.servico-linha {
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid #4caf50;
+  padding-left: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+.servico-linha a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.servico-linha a:hover {
+  text-decoration: underline;
+}
+
+.submenu-servicos {
+  display: none;
+  position: absolute;
+  top: 90px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  z-index: 1000;
+  right: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  width: max-content;
+  min-width: 200px;
+}
+
+.submenu-servicos .submenu-item {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #777;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submenu-servicos .submenu-item:hover {
+  background: #f5f5f5;
+}
+
+/* Ajustes de sobreposição */
+.servicos-container,
+.noticias-container,
+#faq-container {
+  position: relative;
+  z-index: 900;
+  margin-top: 20px;
 }
