@@ -59,14 +59,13 @@
   </style>
 </head>
 <body>
-  <div class="caixa-login">
+  <div class="caixa-login" id="caixa-login">
     <h2>Digite seu Nome / Apelido</h2>
     <input type="text" id="nome" placeholder="Ex: João Taxista" />
     <button onclick="entrarFAQ()">Entrar na FAQ</button>
   </div>
 
   <script>
-    // Preenche o campo com o nome salvo (se existir)
     window.onload = function() {
       const nomeSalvo = localStorage.getItem("faq_user");
       if (nomeSalvo) {
@@ -83,6 +82,13 @@
       localStorage.setItem("faq_user", nome);
       parent.postMessage('abrirFAQCompleta', '*');
     }
+
+    document.addEventListener("click", function(e) {
+      const caixa = document.getElementById("caixa-login");
+      if (!caixa.contains(e.target)) {
+        parent.postMessage("fecharFAQ", "*");
+      }
+    });
   </script>
 </body>
 </html>

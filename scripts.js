@@ -5,9 +5,21 @@ function toggleSubmenu(event) {
   menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 
-document.addEventListener('click', function () {
+document.addEventListener('click', function (e) {
   const menu = document.getElementById('submenu');
   if (menu) menu.style.display = 'none';
+
+  const faqContainer = document.getElementById('faq-container');
+  const iframe = document.getElementById('faq-frame');
+  const faqButton = document.querySelector('.highlight.faq');
+
+  // Se o FAQ está aberto e o clique foi fora do botão FAQ e fora do iframe
+  if (faqContainer.style.display === 'block' &&
+      !faqButton.contains(e.target) &&
+      !faqContainer.contains(e.target)) {
+    iframe.src = "";
+    faqContainer.style.display = "none";
+  }
 });
 
 function mostrarFAQ() {
@@ -17,7 +29,6 @@ function mostrarFAQ() {
   container.style.display = 'block';
 }
 
-// Ouvinte para lidar com mensagens do iframe (faq.html ou acessofaq.html)
 window.addEventListener("message", function(event) {
   const iframe = document.getElementById("faq-frame");
   const container = document.getElementById("faq-container");
