@@ -1,3 +1,4 @@
+
 function toggleSubmenu(event) {
   event.stopPropagation();
   const menu = document.getElementById('submenu');
@@ -15,6 +16,14 @@ function mostrarFAQ() {
     container.style.display = 'none';
   } else {
     container.style.display = 'block';
-    // Scroll apenas se desejar baixar a tela; omitido para manter estática
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 }
+
+window.addEventListener('message', function(event) {
+  if (event.data === 'fecharFAQ') {
+    const container = document.getElementById('faq-container');
+    if (container) container.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
