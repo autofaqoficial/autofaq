@@ -1,29 +1,3 @@
-function fecharTodosContainersPrincipais() {
-  const ids = [
-    "faq-container",
-    "noticias-container",
-    "servicos-container",
-    "container-suspensao",
-    "container-troca-oleo",
-    "container-troca-oleo-cambio",
-    "container-mecanica",
-    "container-lanternagem",
-    "container-ar"
-  ];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = "none";
-  });
-}
-
-function ocultarContainersPrincipais() {
-  const ids = ['servicos-container', 'noticias-container', 'faq-container'];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-}
-
 
 function toggleSubmenu(event) {
   event.stopPropagation();
@@ -50,9 +24,8 @@ document.addEventListener('click', function (e) {
 });
 
 function mostrarFAQ() {
-  fecharTodosContainersPrincipais();
-  const container = document.getElementById("faq-container");
-  const iframe = document.getElementById("faq-frame");
+  const container = document.getElementById('faq-container');
+  const iframe = document.getElementById('faq-frame');
   iframe.src = "acessofaq.html";
   container.style.display = 'block';
 }
@@ -84,9 +57,10 @@ document.addEventListener('click', function(event) {
 });
 
 document.querySelector(".highlight.noticias").addEventListener("click", function () {
-  fecharTodosContainersPrincipais();
   const container = document.getElementById("noticias-container");
-  if (container) container.style.display = "block";
+  if (container) {
+    container.style.display = (container.style.display === "none") ? "block" : "none";
+  }
 });
 
 document.addEventListener("click", function (event) {
@@ -104,9 +78,10 @@ document.addEventListener("click", function (event) {
 });
 
 document.querySelector(".highlight.servicos").addEventListener("click", function () {
-  fecharTodosContainersPrincipais();
   const container = document.getElementById("servicos-container");
-  if (container) container.style.display = "block";
+  if (container) {
+    container.style.display = (container.style.display === "none") ? "block" : "none";
+  }
 });
 
 document.addEventListener("click", function (event) {
@@ -140,13 +115,47 @@ document.addEventListener("click", function (e) {
 });
 
 function abrirServicosCategoria(categoria) {
-  fecharTodosContainersPrincipais();
-  const submenu = document.getElementById("submenu-servicos");
-  if (submenu) submenu.style.display = "none";
+  if (categoria === 'suspensao') {
+    const container = document.getElementById("servicos-container");
+    if (container) {
+      container.style.display = "block";
+    }
+  }
+}
+
+function abrirServicosCategoria(categoria) {
+  const ids = [
+    "container-suspensao",
+    "container-troca-oleo",
+    "container-troca-oleo-cambio",
+    "container-mecanica",
+    "container-lanternagem",
+    "container-ar"
+  ];
+
+  // Ocultar todos
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+
+  // Mostrar o escolhido
   const alvo = document.getElementById("container-" + categoria);
   if (alvo) alvo.style.display = "block";
 }
-function fecharContainer(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = 'none';
+
+let fecharSubmenuTimer;
+
+const submenuServicos = document.getElementById("submenu-servicos");
+
+if (submenuServicos) {
+  submenuServicos.addEventListener("mouseleave", () => {
+    fecharSubmenuTimer = setTimeout(() => {
+      submenuServicos.style.display = "none";
+    }, 3000);
+  });
+
+  submenuServicos.addEventListener("mouseenter", () => {
+    clearTimeout(fecharSubmenuTimer);
+  });
 }
