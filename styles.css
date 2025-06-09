@@ -196,7 +196,7 @@ header h1 {
   top: 20px;
   right: 20px;
   z-index: 1001;
-  display: block;
+  display: none;
   font-size: 2rem;
   padding: 12px;
   cursor: pointer;
