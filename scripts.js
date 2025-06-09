@@ -207,3 +207,51 @@ document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
     });
   }
 });
+
+
+function salvarParceiro() {
+  const empresa = document.getElementById("empresa").value.trim();
+  const endereco = document.getElementById("endereco").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+  const tipo = document.getElementById("tipo").value;
+
+  if (!empresa || !endereco || !telefone || !whatsapp || !tipo) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  const ref = db.ref("parceiros/" + tipo).push();
+  ref.set({
+    empresa, endereco, telefone, whatsapp, tipo, timestamp: Date.now()
+  }).then(() => {
+    alert("✅ Parceiro cadastrado com sucesso!");
+    document.getElementById("container-parceiro").style.display = "none";
+    carregarParceiros(); // Atualiza exibição
+  });
+}
+
+function carregarParceiros() {
+  const categorias = ["suspensao", "troca-oleo", "troca-oleo-cambio", "mecanica", "lanternagem", "ar"];
+  categorias.forEach(categoria => {
+    const container = document.getElementById("container-" + categoria);
+    if (!container) return;
+    db.ref("parceiros/" + categoria).once("value", snap => {
+      const dados = snap.val();
+      if (!dados) return;
+      Object.values(dados).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "servico-linha";
+        div.innerHTML = `
+          <div><strong>Nome:</strong> ${item.empresa}</div>
+          <div><strong>Endereço:</strong> ${item.endereco}</div>
+          <div><strong>Telefone:</strong> <a href="tel:${item.telefone}">${item.telefone}</a></div>
+          <div><strong>WhatsApp:</strong> <a href="https://wa.me/${item.whatsapp.replace(/\D/g,'')}" target="_blank">Conversar</a></div>
+        `;
+        container.appendChild(div);
+      });
+    });
+  });
+}
+
+window.addEventListener("load", carregarParceiros);

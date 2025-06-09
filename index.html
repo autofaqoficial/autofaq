@@ -168,6 +168,38 @@
     <div class="noticia-texto">Preparando integração com backend para gerenciar notícias.</div>
   </div>
 </div>
+
+<div id="container-parceiro" class="form-container" style="display:none;">
+  <h2>Cadastro de Parceiro</h2>
+  <label for="empresa">Nome da Empresa:</label>
+  <input type="text" id="empresa" placeholder="Ex: Mecânica Rápida" />
+
+  <label for="endereco">Endereço:</label>
+  <input type="text" id="endereco" placeholder="Rua, número, bairro" />
+
+  <label for="telefone">Telefone:</label>
+  <input type="text" id="telefone" placeholder="(XX) XXXXX-XXXX" />
+
+  <label for="whatsapp">WhatsApp:</label>
+  <input type="text" id="whatsapp" placeholder="(XX) XXXXX-XXXX" />
+
+  <label for="tipo">Tipo de Serviço:</label>
+  <select id="tipo" onchange="preencherTipo()" disabled>
+    <option value="">Selecione abaixo</option>
+    <option value="suspensao">Suspensão</option>
+    <option value="troca-oleo">Troca de óleo</option>
+    <option value="troca-oleo-cambio">Troca de Óleo Câmbio</option>
+    <option value="mecanica">Mecânica geral</option>
+    <option value="lanternagem">Lanternagem/Pintura</option>
+    <option value="ar">Ar Condicionado</option>
+  </select>
+
+  <div style="margin-top: 16px;">
+    <button onclick="salvarParceiro()">Salvar</button>
+    <button onclick="fecharContainer('container-parceiro')">Fechar</button>
+  </div>
+</div>
+
 </div> <!-- Fechando container principal -->
 
 <script src="scripts.js"></script>
