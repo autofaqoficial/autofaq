@@ -266,3 +266,60 @@ function carregarParceiros() {
 }
 
 window.addEventListener("load", carregarParceiros);
+
+
+function solicitarSenhaFirebase(callback) {
+  const entrada = prompt("Digite a senha de acesso:");
+  if (!entrada) return;
+  db.ref("senhas/taxi").once("value").then(snapshot => {
+    const senhaCorreta = snapshot.val();
+    if (entrada === senhaCorreta) {
+      callback();
+    } else {
+      alert("❌ Senha incorreta.");
+    }
+  }).catch(err => {
+    alert("Erro ao verificar senha: " + err.message);
+  });
+}
+
+document.querySelectorAll(".menu-item").forEach(item => {
+  if (item.textContent.includes("Seja um Parceiro")) {
+    item.addEventListener("click", function () {
+      solicitarSenhaFirebase(() => {
+        document.getElementById("container-parceiro").style.display = "block";
+      });
+    });
+  }
+  if (item.textContent.includes("Área Adm")) {
+    item.addEventListener("click", function () {
+      solicitarSenhaFirebase(() => {
+        document.getElementById("container-admin").style.display = "block";
+      });
+    });
+  }
+});
+
+function salvarSenhas() {
+  const novaSenhaAdm = document.getElementById("senhaAdm").value;
+  const novaSenhaParceiro = document.getElementById("senhaParceiro").value;
+  if (novaSenhaAdm) db.ref("senhas/taxi").set(novaSenhaAdm);
+  if (novaSenhaParceiro) db.ref("senhas/parceiro").set(novaSenhaParceiro);
+  alert("✅ Senhas atualizadas com sucesso!");
+}
+
+function salvarNoticias() {
+  const noticias = document.getElementById("noticias").value;
+  db.ref("conteudo/noticias").set(noticias);
+  alert("📰 Notícias salvas.");
+}
+
+function salvarServicos() {
+  const servicos = document.getElementById("servicos").value;
+  db.ref("conteudo/servicos").set(servicos);
+  alert("🛠️ Serviços salvos.");
+}
+
+function sairAdm() {
+  document.getElementById("container-admin").style.display = "none";
+}
