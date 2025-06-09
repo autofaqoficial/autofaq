@@ -366,3 +366,12 @@ header h1 {
     width: calc(100% - 20px) !important;
   }
 }
+
+
+
+/* Hover effect: light shadow for submenu items and mobile menu items */
+.submenu-servicos .submenu-item:hover,
+.mobile-menu .menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

@@ -105,6 +105,14 @@ document.addEventListener('click', function(event) {
 document.querySelector(".highlight.noticias").addEventListener("click", function(e) {
   e.stopPropagation();
   closeAll();
+
+// SERVICES button opens only the submenu
+document.querySelector('.highlight.servicos').addEventListener('click', function(e) {
+  e.stopPropagation();
+  closeAll();
+  document.getElementById('submenu-servicos').style.display = 'block';
+});
+
   const container = document.getElementById("noticias-container");
   if (container) container.style.display = "block";
 });
@@ -122,12 +130,11 @@ document.addEventListener("click", function (event) {
   }
 });
 
-document.querySelector(".highlight.servicos").addEventListener("click", function () {
-  fecharTodosContainersPrincipais();
-  const container = document.getElementById("servicos-container");
-  if (container) container.style.display = "block";
+document.querySelector(".highlight.servicos").addEventListener("click", function(e) {
+  e.stopPropagation();
+  closeAll();
+  document.getElementById("submenu-servicos").style.display = "block";
 });
-
 document.addEventListener("click", function (event) {
   const servicosContainer = document.getElementById("servicos-container");
   const servicosBotao = document.querySelector(".highlight.servicos");
@@ -142,12 +149,11 @@ document.addEventListener("click", function (event) {
   }
 });
 
-document.querySelector(".highlight.servicos").addEventListener("click", function (e) {
+document.querySelector(".highlight.servicos").addEventListener("click", function(e) {
   e.stopPropagation();
-  const submenu = document.getElementById("submenu-servicos");
-  submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
+  closeAll();
+  document.getElementById("submenu-servicos").style.display = "block";
 });
-
 document.addEventListener("click", function (e) {
   const submenu = document.getElementById("submenu-servicos");
   const botaoServicos = document.querySelector(".highlight.servicos");
