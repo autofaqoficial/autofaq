@@ -191,57 +191,15 @@ header h1 {
   width: 20px;
   height: 20px;
 }
-.hamburger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
-  display: none;
-  font-size: 2rem;
-  padding: 12px;
-  cursor: pointer;
-  font-family: 'Bebas Neue', sans-serif;
-  color: #aaa;
-}
 
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background: #fff;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  width: max-content;
-  min-width: 200px;
-  max-width: 90%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  z-index: 999;
-  padding: 10px 0;
-  border-radius: 8px;
-}
 
-.mobile-menu .menu-item {
-  padding: 14px 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4em;
-  color: #777;
-  font-weight: bold;
-  border-bottom: 1px solid #eee;
-}
 
 .mobile-menu .menu-item:last-child {
   border-bottom: none;
 }
 
 @media (max-width: 768px) {
-  .hamburger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
-    display: block;
-  }
-
+  
   .highlights {
     margin-top: 60px;
   }
@@ -419,4 +377,56 @@ header h1 {
   padding: 10px 16px;
   font-size: 1rem;
   cursor: pointer;
+}
+
+
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  display: block;
+  font-size: 2rem;
+  padding: 12px;
+  cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #aaa;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: max-content;
+  min-width: 200px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.mobile-menu .menu-item {
+  padding: 14px 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4em;
+  color: #777;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu .menu-item:last-child {
+  border-bottom: none;
+}
+
+.secao-container {
+  padding: 60px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 40px auto;
 }

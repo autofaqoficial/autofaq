@@ -97,10 +97,7 @@ window.addEventListener("message", function(event) {
 });
 
 
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobileMenu");
-  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-}
+
 
 document.addEventListener('click', function(event) {
   const menu = document.getElementById("mobileMenu");
@@ -185,10 +182,7 @@ function fecharContainer(id) {
 }
 
 // Touch feedback for submenu and mobile menu items
-document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-item').forEach(item => {
-  item.addEventListener('touchstart', function() {
-    this.classList.add('touch-active');
-  });
+
   item.addEventListener('touchmove', function() {
     this.classList.add('touch-active');
   });
@@ -201,21 +195,7 @@ document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-i
 });
 
 // Handler "Seja um Parceiro/Serviço" in mobile menu
-document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
-  let tipoSelecionado = null;
-  if (item.textContent.trim().includes('Parceiro')) {
-    item.addEventListener('click', function(e) {
-    if (item.dataset.tipo) tipoSelecionado = item.dataset.tipo;
-      e.stopPropagation();
-      closeAll();
-      const pwd = prompt('Digite a senha de acesso:');
-      if (pwd === '123') {
-        document.getElementById('tipo').value = tipoSelecionado || '';
-        document.getElementById('container-parceiro').style.display = 'block';
-      } else {
-        alert('Senha incorreta.');
-      }
-    });
+
   }
 });
 
@@ -294,18 +274,7 @@ function solicitarSenhaFirebaseParceiro(callback) {
 }
 
 // Novo handler para menu mobile
-document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
-  item.addEventListener('click', function(e) {
-    e.stopPropagation();
-    closeAll();
 
-    const texto = item.textContent.trim();
-
-    if (texto.includes("Área Adm")) {
-      solicitarSenhaFirebaseAdm(() => {
-        alert("✅ Acesso concedido à Área Adm");
-        // Aqui você pode mostrar o painel ADM se quiser
-      });
     } else if (texto.includes("Parceiro")) {
       solicitarSenhaFirebaseParceiro(() => {
         document.getElementById("container-parceiro").style.display = "block";
@@ -313,3 +282,24 @@ document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
     }
   });
 });
+
+
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+function abrirSecao(numero) {
+  // Oculta todas as seções
+  for (let i = 1; i <= 3; i++) {
+    const s = document.getElementById("secao" + i);
+    if (s) s.style.display = "none";
+  }
+
+  // Exibe a seção solicitada
+  const alvo = document.getElementById("secao" + numero);
+  if (alvo) alvo.style.display = "block";
+
+  // Fecha menu
+  document.getElementById("mobileMenu").style.display = "none";
+}

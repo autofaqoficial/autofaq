@@ -33,110 +33,21 @@
         <img alt="Logo" class="logo" src="imagens/logo_taxi.jpeg" />
         <h1>Clube Nissan Kicks Táxi</h1>
     </header>
-<!-- Botão Hamburguer -->
-<div class="hamburger" onclick="toggleMobileMenu()">
-  ☰
-</div>
 
-<!-- Menu Mobile -->
+<!-- Menu Hamburguer -->
+<div class="hamburger" onclick="toggleMobileMenu()">☰</div>
 <nav id="mobileMenu" class="mobile-menu">
-  <div class="menu-item">Área Adm</div>
-  <div class="menu-item">Seja um Parceiro/Serviço</div>
-  <div class="menu-item">Contatos</div>
+  <div class="menu-item" onclick="abrirSecao(1)">Item 1</div>
+  <div class="menu-item" onclick="abrirSecao(2)">Item 2</div>
+  <div class="menu-item" onclick="abrirSecao(3)">Item 3</div>
 </nav>
+
+
 
     <div class="container">
 
         <div class="highlights">
-            <div class="botao-wrapper">
-                <div class="highlight servicos">
-                    <img alt="Serviços" src="imagens/serv.png" />
-                </div>
-                <div class="label">Serviços</div>
-<div id="submenu-servicos" class="submenu-servicos">
-  <div class="submenu-item" onclick="abrirServicosCategoria('suspensao')">Suspensão</div>
-  <div class="submenu-item" onclick="abrirServicosCategoria('troca-oleo')">Troca de óleo</div>
-  <div class="submenu-item" onclick="abrirServicosCategoria('troca-oleo-cambio')">Troca de Óleo Câmbio</div>
-  <div class="submenu-item" onclick="abrirServicosCategoria('mecanica')">Mecânica geral</div>
-  <div class="submenu-item" onclick="abrirServicosCategoria('lanternagem')">Lanternagem/Pintura</div>
-  <div class="submenu-item" onclick="abrirServicosCategoria('ar')">Ar Condicionado</div>
-</div>
-
-            </div>
-            <div class="botao-wrapper">
-                <div class="highlight noticias">
-                    <img alt="noticias" src="imagens/noticias.jpg" />
-                </div>
-                <div class="label">Notícias</div>
-            </div>
-            <div class="botao-wrapper">
-                <div class="highlight manual">
-                    <img alt="Manual" src="imagens/manual.png" />
-                </div>
-                <div class="label">Manual</div>
-            </div>
-            <div class="botao-wrapper">
-                <div class="highlight faq" onclick="mostrarFAQ()">
-                    <img alt="FAQ" src="imagens/botao_faq.png" />
-                </div>
-                <div class="label">FAQ</div>
-            </div>
-
-            <!-- FAQ Container at bottom -->
-            <div id="faq-container" style="display:none; margin: 20px;">
-                <iframe height="800" id="faq-frame" src="acessofaq.html" style="border:none;" width="100%"></iframe>
-            </div>
             
-<!-- Container de Notícias -->
-<!-- Container Suspensão -->
-<div id="container-suspensao" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">🔧 Serviços de Suspensão</h2>
-  <div class="servico-linha">
-    <div><strong>Nome:</strong> Leonardo</div>
-    <div><strong>Telefone:</strong> <a href="tel:+5521969852743">(21) 96985-2743</a></div>
-    <div><strong>Email:</strong> <a href="mailto:leo_rrodrigues@yahoo.com.br">leo_rrodrigues@yahoo.com.br</a></div>
-    <div><strong>WhatsApp:</strong> <a href="https://wa.me/5521969852743" target="_blank">Conversar</a></div>
-  </div>
-</div>
-
-<!-- Container Troca de Óleo -->
-<div id="container-troca-oleo" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">Troca de Óleo</h2>
-  <p>Exemplo: Serviço especializado em troca rápida de óleo de motor.</p>
-</div>
-
-<!-- Container Troca de Óleo Câmbio -->
-<div id="container-troca-oleo-cambio" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">Troca de Óleo do Câmbio</h2>
-  <p>Exemplo: Troca com máquina e diagnóstico.</p>
-</div>
-
-<!-- Container Mecânica Geral -->
-<div id="container-mecanica" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">Mecânica Geral</h2>
-  <p>Exemplo: Manutenção geral preventiva e corretiva.</p>
-</div>
-
-<!-- Container Lanternagem -->
-<div id="container-lanternagem" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">Lanternagem / Pintura</h2>
-  <p>Exemplo: Serviços de funilaria e pintura profissional.</p>
-</div>
-
-<!-- Container Ar Condicionado -->
-<div id="container-ar" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">Ar Condicionado</h2>
-  <p>Exemplo: Higienização e recarga de gás.</p>
-</div>
-
-<div id="servicos-container" class="servicos-container" style="display: none;">
-  <h2 class="servicos-titulo">🔧 Serviços & Parceiros</h2>
-  <div class="servico-linha">
-    <div><strong>Nome:</strong> Leonardo</div>
-    <div><strong>Telefone:</strong> <a href="tel:+5521969852743">(21) 96985-2743</a></div>
-    <div><strong>Email:</strong> <a href="mailto:leo_rrodrigues@yahoo.com.br">leo_rrodrigues@yahoo.com.br</a></div>
-    <div><strong>WhatsApp:</strong> <a href="https://wa.me/5521969852743" target="_blank">Conversar</a></div>
-  </div>
   <div class="servico-linha">
     <div><strong>Nome:</strong> Mecânica Rápida</div>
     <div><strong>Telefone:</strong> <a href="tel:+5511988888888">+55 11 98888-8888</a></div>
@@ -198,6 +109,17 @@
     <button onclick="salvarParceiro()">Salvar</button>
     <button onclick="fecharContainer('container-parceiro')">Fechar</button>
   </div>
+</div>
+
+
+<div id="secao1" class="secao-container" style="display:none;">
+  <h1 style="font-size: 5rem; text-align: center;">1</h1>
+</div>
+<div id="secao2" class="secao-container" style="display:none;">
+  <h1 style="font-size: 5rem; text-align: center;">2</h1>
+</div>
+<div id="secao3" class="secao-container" style="display:none;">
+  <h1 style="font-size: 5rem; text-align: center;">3</h1>
 </div>
 
 </div> <!-- Fechando container principal -->
