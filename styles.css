@@ -191,18 +191,7 @@ header h1 {
   width: 20px;
   height: 20px;
 }
-.hamburger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
-  display: block;
-  font-size: 2rem;
-  padding: 12px;
-  cursor: pointer;
-  font-family: 'Bebas Neue', sans-serif;
-  color: #aaa;
-}
+
 
 .mobile-menu {
   display: none;
@@ -234,13 +223,7 @@ header h1 {
 }
 
 @media (max-width: 768px) {
-  .hamburger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
-    display: block;
-  }
+  
 
   .highlights {
     margin-top: 60px;
@@ -419,4 +402,21 @@ header h1 {
   padding: 10px 16px;
   font-size: 1rem;
   cursor: pointer;
+}
+
+
+#container-admin input[type="text"],
+#container-admin textarea {
+  font-size: 1.2rem;
+  padding: 14px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+#container-admin button {
+  font-size: 1.1rem;
+  padding: 10px 18px;
+  margin-right: 10px;
+  margin-top: 6px;
 }

@@ -300,7 +300,25 @@ document.querySelectorAll(".menu-item").forEach(item => {
   }
 });
 
-function salvarSenhas() {
+function salvarSenhasAdm() {
+  const novaSenhaAdm = document.getElementById("senhaAdm").value;
+  if (novaSenhaAdm) {
+    db.ref("senhas/adm").set(novaSenhaAdm).then(() => {
+      alert("✅ Senha da Área Adm atualizada!");
+      document.getElementById("senhaAdm").disabled = true;
+    });
+  }
+}
+
+function salvarSenhaParceiro() {
+  const novaSenhaParceiro = document.getElementById("senhaParceiro").value;
+  if (novaSenhaParceiro) {
+    db.ref("senhas/parceiro").set(novaSenhaParceiro).then(() => {
+      alert("✅ Senha de parceiro atualizada!");
+      document.getElementById("senhaParceiro").disabled = true;
+    });
+  }
+}
   const novaSenhaAdm = document.getElementById("senhaAdm").value;
   const novaSenhaParceiro = document.getElementById("senhaParceiro").value;
   if (novaSenhaAdm) db.ref("senhas/adm").set(novaSenhaAdm);
@@ -323,3 +341,23 @@ function salvarServicos() {
 function sairAdm() {
   document.getElementById("container-admin").style.display = "none";
 }
+
+function habilitarCampo(id) {
+  const campo = document.getElementById(id);
+  campo.disabled = false;
+  campo.focus();
+}
+
+
+// Controle de exibição do menu hamburguer no desktop
+let exibirHamburguerDesktop = false;
+
+window.addEventListener("load", () => {
+  const hamburguer = document.querySelector(".hamburger");
+  if (!hamburguer) return;
+  if (exibirHamburguerDesktop || window.innerWidth <= 768) {
+    hamburguer.style.display = "block";
+  } else {
+    hamburguer.style.display = "none";
+  }
+});

@@ -179,24 +179,37 @@
 </div> <!-- Fechando container principal -->
 <script src="scripts.js"></script>
 </div>
+
 <div id="container-admin" style="display:none; padding: 20px;">
 <h2>🔐 Painel Administrativo</h2>
+
 <h3>Alterar Senhas</h3>
+
 <label>Senha da Área Adm:</label>
-<input id="senhaAdm" placeholder="Nova senha..." type="text"/>
-<label>Senha do Parceiro:</label>
-<input id="senhaParceiro" placeholder="Nova senha..." type="text"/>
-<button onclick="salvarSenhas()">💾 Salvar Senhas</button>
+<input id="senhaAdm" placeholder="Nova senha..." type="text" disabled />
+<button onclick="habilitarCampo('senhaAdm')">🔁 Alterar</button>
+<button onclick="salvarSenhasAdm()">💾 Salvar</button>
+
+<label style="margin-top: 20px;">Senha do Parceiro:</label>
+<input id="senhaParceiro" placeholder="Nova senha..." type="text" disabled />
+<button onclick="habilitarCampo('senhaParceiro')">🔁 Alterar</button>
+<button onclick="salvarSenhaParceiro()">💾 Salvar</button>
+
 <hr/>
+
 <h3>Editar Notícias</h3>
 <textarea id="noticias" placeholder="Adicione ou edite as notícias aqui..."></textarea>
 <button onclick="salvarNoticias()">💾 Salvar Notícias</button>
+
 <hr/>
+
 <h3>Gerenciar Serviços</h3>
 <textarea id="servicos" placeholder="Adicione ou edite os serviços aqui..."></textarea>
 <button onclick="salvarServicos()">💾 Salvar Serviços</button>
+
 <hr/>
 <button onclick="sairAdm()">🚪 Sair do Admin</button>
 </div>
+
 </body>
 </html>
