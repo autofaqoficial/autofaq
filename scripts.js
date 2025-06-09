@@ -191,3 +191,19 @@ document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-i
     this.classList.remove('touch-active');
   });
 });
+
+// Handler "Seja um Parceiro/Serviço" in mobile menu
+document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
+  if (item.textContent.trim().includes('Parceiro')) {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeAll();
+      const pwd = prompt('Digite a senha de acesso:');
+      if (pwd === '123') {
+        document.getElementById('container-parceiro').style.display = 'block';
+      } else {
+        alert('Senha incorreta.');
+      }
+    });
+  }
+});
