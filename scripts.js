@@ -98,7 +98,6 @@ window.addEventListener("message", function(event) {
 
 
 
-
 document.addEventListener('click', function(event) {
   const menu = document.getElementById("mobileMenu");
   const hamburger = document.querySelector(".hamburger");
@@ -182,7 +181,10 @@ function fecharContainer(id) {
 }
 
 // Touch feedback for submenu and mobile menu items
-
+document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-item').forEach(item => {
+  item.addEventListener('touchstart', function() {
+    this.classList.add('touch-active');
+  });
   item.addEventListener('touchmove', function() {
     this.classList.add('touch-active');
   });
@@ -195,7 +197,21 @@ function fecharContainer(id) {
 });
 
 // Handler "Seja um Parceiro/Serviço" in mobile menu
-
+document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
+  let tipoSelecionado = null;
+  if (item.textContent.trim().includes('Parceiro')) {
+    item.addEventListener('click', function(e) {
+    if (item.dataset.tipo) tipoSelecionado = item.dataset.tipo;
+      e.stopPropagation();
+      closeAll();
+      const pwd = prompt('Digite a senha de acesso:');
+      if (pwd === '123') {
+        document.getElementById('tipo').value = tipoSelecionado || '';
+        document.getElementById('container-parceiro').style.display = 'block';
+      } else {
+        alert('Senha incorreta.');
+      }
+    });
   }
 });
 
@@ -246,60 +262,3 @@ function carregarParceiros() {
 }
 
 window.addEventListener("load", carregarParceiros);
-
-
-
-function solicitarSenhaFirebaseAdm(callback) {
-  const senha = prompt("Digite a senha da Área Adm:");
-  if (!senha) return;
-  db.ref("senhas/adm").once("value").then(snapshot => {
-    if (senha === snapshot.val()) {
-      callback();
-    } else {
-      alert("❌ Senha incorreta.");
-    }
-  });
-}
-
-function solicitarSenhaFirebaseParceiro(callback) {
-  const senha = prompt("Digite a senha de parceiro:");
-  if (!senha) return;
-  db.ref("senhas/parceiro").once("value").then(snapshot => {
-    if (senha === snapshot.val()) {
-      callback();
-    } else {
-      alert("❌ Senha incorreta.");
-    }
-  });
-}
-
-// Novo handler para menu mobile
-
-    } else if (texto.includes("Parceiro")) {
-      solicitarSenhaFirebaseParceiro(() => {
-        document.getElementById("container-parceiro").style.display = "block";
-      });
-    }
-  });
-});
-
-
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobileMenu");
-  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-}
-
-function abrirSecao(numero) {
-  // Oculta todas as seções
-  for (let i = 1; i <= 3; i++) {
-    const s = document.getElementById("secao" + i);
-    if (s) s.style.display = "none";
-  }
-
-  // Exibe a seção solicitada
-  const alvo = document.getElementById("secao" + numero);
-  if (alvo) alvo.style.display = "block";
-
-  // Fecha menu
-  document.getElementById("mobileMenu").style.display = "none";
-}
