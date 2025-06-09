@@ -200,98 +200,23 @@ document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-i
   });
 });
 
-// Handler "Seja um Parceiro/Serviço" in mobile menu
-document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
-  let tipoSelecionado = null;
-  if (item.textContent.trim().includes('Parceiro')) {
-    item.addEventListener('click', function(e) {
-    if (item.dataset.tipo) tipoSelecionado = item.dataset.tipo;
-      e.stopPropagation();
-      closeAll();
-      const pwd = prompt('Digite a senha de acesso:');
-      if (pwd === '123') {
-        document.getElementById('tipo').value = tipoSelecionado || '';
-        document.getElementById('container-parceiro').style.display = 'block';
-      } else {
-        alert('Senha incorreta.');
-      }
-    });
-  }
-});
-
-
-function salvarParceiro() {
-  const empresa = document.getElementById("empresa").value.trim();
-  const endereco = document.getElementById("endereco").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const whatsapp = document.getElementById("whatsapp").value.trim();
-  const tipo = document.getElementById("tipo").value;
-
-  if (!empresa || !endereco || !telefone || !whatsapp || !tipo) {
-    alert("Preencha todos os campos.");
-    return;
-  }
-
-  const ref = db.ref("parceiros/" + tipo).push();
-  ref.set({
-    empresa, endereco, telefone, whatsapp, tipo, timestamp: Date.now()
-  }).then(() => {
-    alert("✅ Parceiro cadastrado com sucesso!");
-    document.getElementById("container-parceiro").style.display = "none";
-    carregarParceiros(); // Atualiza exibição
-  });
-}
-
-function carregarParceiros() {
-  const categorias = ["suspensao", "troca-oleo", "troca-oleo-cambio", "mecanica", "lanternagem", "ar"];
-  categorias.forEach(categoria => {
-    const container = document.getElementById("container-" + categoria);
-    if (!container) return;
-    db.ref("parceiros/" + categoria).once("value", snap => {
-      const dados = snap.val();
-      if (!dados) return;
-      Object.values(dados).forEach(item => {
-        const div = document.createElement("div");
-        div.className = "servico-linha";
-        div.innerHTML = `
-          <div><strong>Nome:</strong> ${item.empresa}</div>
-          <div><strong>Endereço:</strong> ${item.endereco}</div>
-          <div><strong>Telefone:</strong> <a href="tel:${item.telefone}">${item.telefone}</a></div>
-          <div><strong>WhatsApp:</strong> <a href="https://wa.me/${item.whatsapp.replace(/\D/g,'')}" target="_blank">Conversar</a></div>
-        `;
-        container.appendChild(div);
-      });
-    });
-  });
-}
-
-window.addEventListener("load", carregarParceiros);
-
-
-function solicitarSenhaFirebase(callback) {
-  const entrada = prompt("Digite a senha de acesso:");
-  if (!entrada) return;
-  db.ref("senhas/adm").once("value").then(snapshot => {
-    const senhaCorreta = snapshot.val();
-    if (entrada === senhaCorreta) {
-      callback();
-    } else {
-      alert("❌ Senha incorreta.");
-    }
-  }).catch(err => {
-    alert("Erro ao verificar senha: " + err.message);
-  });
-}
-
 document.querySelectorAll(".menu-item").forEach(item => {
   if (item.textContent.includes("Seja um Parceiro")) {
     item.addEventListener("click", function () {
-      solicitarSenhaFirebase(() => {
+      solicitarSenhaFirebaseParceiro(() => {
         document.getElementById("container-parceiro").style.display = "block";
       });
     });
   }
+
   if (item.textContent.includes("Área Adm")) {
+    item.addEventListener("click", function () {
+      solicitarSenhaFirebase(() => {
+        document.getElementById("container-admin").style.display = "block";
+      });
+    });
+  }
+});) {
     item.addEventListener("click", function () {
       solicitarSenhaFirebase(() => {
         document.getElementById("container-admin").style.display = "block";
@@ -349,15 +274,35 @@ function habilitarCampo(id) {
 }
 
 
+
 // Controle de exibição do menu hamburguer no desktop
 let exibirHamburguerDesktop = false;
 
 window.addEventListener("load", () => {
   const hamburguer = document.querySelector(".hamburger");
   if (!hamburguer) return;
-  if (exibirHamburguerDesktop || window.innerWidth <= 768) {
+  if (window.innerWidth <= 768 || exibirHamburguerDesktop) {
     hamburguer.style.display = "block";
   } else {
     hamburguer.style.display = "none";
   }
 });
+
+  }
+});
+
+
+function solicitarSenhaFirebaseParceiro(callback) {
+  const entrada = prompt("Digite a senha de parceiro:");
+  if (!entrada) return;
+  db.ref("senhas/parceiro").once("value").then(snapshot => {
+    const senhaCorreta = snapshot.val();
+    if (entrada === senhaCorreta) {
+      callback();
+    } else {
+      alert("❌ Senha incorreta.");
+    }
+  }).catch(err => {
+    alert("Erro ao verificar senha: " + err.message);
+  });
+}
