@@ -175,3 +175,19 @@ function fecharContainer(id) {
   const el = document.getElementById(id);
   if (el) el.style.display = 'none';
 }
+
+// Touch feedback for submenu and mobile menu items
+document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-item').forEach(item => {
+  item.addEventListener('touchstart', function() {
+    this.classList.add('touch-active');
+  });
+  item.addEventListener('touchmove', function() {
+    this.classList.add('touch-active');
+  });
+  item.addEventListener('touchend', function() {
+    this.classList.remove('touch-active');
+  });
+  item.addEventListener('touchcancel', function() {
+    this.classList.remove('touch-active');
+  });
+});

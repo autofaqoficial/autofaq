@@ -375,3 +375,11 @@ header h1 {
   background-color: rgba(0, 0, 0, 0.05);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+
+/* Touch active effect for submenu and mobile menu items */
+.submenu-servicos .submenu-item.touch-active,
+.mobile-menu .menu-item.touch-active {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
