@@ -1,3 +1,11 @@
+
+// Preencher automaticamente o campo tipo de serviço e abrir formulário
+function abrirFormularioParceiroPorTipo(tipo) {
+  document.getElementById('tipo').value = tipo;
+  document.getElementById('container-parceiro').style.display = 'block';
+}
+
+
 function closeAll() {
   const ids = [
     'faq-container',
@@ -194,12 +202,15 @@ document.querySelectorAll('.submenu-servicos .submenu-item, .mobile-menu .menu-i
 
 // Handler "Seja um Parceiro/Serviço" in mobile menu
 document.querySelectorAll('.mobile-menu .menu-item').forEach(item => {
+  let tipoSelecionado = null;
   if (item.textContent.trim().includes('Parceiro')) {
     item.addEventListener('click', function(e) {
+    if (item.dataset.tipo) tipoSelecionado = item.dataset.tipo;
       e.stopPropagation();
       closeAll();
       const pwd = prompt('Digite a senha de acesso:');
       if (pwd === '123') {
+        document.getElementById('tipo').value = tipoSelecionado || '';
         document.getElementById('container-parceiro').style.display = 'block';
       } else {
         alert('Senha incorreta.');
