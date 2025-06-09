@@ -271,7 +271,7 @@ window.addEventListener("load", carregarParceiros);
 function solicitarSenhaFirebase(callback) {
   const entrada = prompt("Digite a senha de acesso:");
   if (!entrada) return;
-  db.ref("senhas/taxi").once("value").then(snapshot => {
+  db.ref("senhas/adm").once("value").then(snapshot => {
     const senhaCorreta = snapshot.val();
     if (entrada === senhaCorreta) {
       callback();
@@ -303,7 +303,7 @@ document.querySelectorAll(".menu-item").forEach(item => {
 function salvarSenhas() {
   const novaSenhaAdm = document.getElementById("senhaAdm").value;
   const novaSenhaParceiro = document.getElementById("senhaParceiro").value;
-  if (novaSenhaAdm) db.ref("senhas/taxi").set(novaSenhaAdm);
+  if (novaSenhaAdm) db.ref("senhas/adm").set(novaSenhaAdm);
   if (novaSenhaParceiro) db.ref("senhas/parceiro").set(novaSenhaParceiro);
   alert("✅ Senhas atualizadas com sucesso!");
 }
